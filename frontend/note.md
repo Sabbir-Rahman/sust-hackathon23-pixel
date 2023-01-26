@@ -1,1 +1,1 @@
-This is frontend for project
+This is frontend for proje
