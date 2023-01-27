@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Heatmap from "./component/Analytics/heatmap.component";
 import Login from "./pages/authPages/Login";
 import Register from "./pages/authPages/Register";
 import HomePage from "./pages/HomePage";
