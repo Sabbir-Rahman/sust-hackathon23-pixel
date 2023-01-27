@@ -8,7 +8,7 @@ const SellerSignUp = () => {
           className='w-full h-screen object-cover'
         />
       </div>
-      <div className='w-full md:w-1/2 h-full flex flex-col items-start justify-start  bg-bgColor p-4'>
+      <div className='w-full md:w-1/2 h-full flex flex-col items-start justify-start  bg-bgColor p-12'>
         <div className='flex items-center justify-center text-xs mb-5'>
           <div className='flex items-center justify-center'>
             <div className='h-6 w-6 flex items-center mr-1 justify-center rounded-md text-white  bg-accent'>
@@ -82,7 +82,7 @@ const SellerSignUp = () => {
             />
           </div>
         </div>
-        <div className='w-3/4 text-center mt-8'>
+        <div className='mt-8'>
           <span>Already have an account? </span>
           <span className='text-accent cursor-pointer '>Sign in</span>
         </div>

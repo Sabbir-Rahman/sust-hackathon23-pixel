@@ -7,6 +7,7 @@ import SubscriptionPage from './pages/SubscriptionPage';
 import MarketPlace from './pages/MarketPlace';
 import ServiceDetails from './component/MarketPlace/ServiceDetails';
 import SellerSignUp from './pages/SellerAuthPages/SellerSignup';
+import SellerRegister from './pages/SellerAuthPages/SellerRegister';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/market/:id' element={<ServiceDetails />} />
         <Route path='/subscription-page' element={<SubscriptionPage />} />
         <Route path='/seller-signup' element={<SellerSignUp />} />
+        <Route path='/seller-signin' element={<SellerRegister />} />
       </Routes>
     </div>
   );
