@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { get } from 'lodash'
 
-import { jwtUtils } from '../utils'
+import { jwtUtils } from '../src/utils'
 
 const auth =
   (roles: string[]) =>

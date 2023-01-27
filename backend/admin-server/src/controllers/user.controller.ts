@@ -17,7 +17,6 @@ async function createUser(
     isReadOnly: false,
     data: {},
   }
-  let isDuplicateUser = true
   
   
   let username = req.body.nickName.toLowerCase()

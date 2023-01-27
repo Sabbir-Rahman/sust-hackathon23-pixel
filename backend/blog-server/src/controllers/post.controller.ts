@@ -14,7 +14,7 @@ const createPost = async (req: Request<never, never, AddProblemInput['body']>, r
     data: {},
   }
 
-  const { title, descryption, images, postType,problemTag, lat,long} = req.body
+  const { title, descryption, images, postType,problemTag, coordinates} = req.body
   const postObj: Post = {
     userId: res.locals.user.userId,
     title,
@@ -22,7 +22,7 @@ const createPost = async (req: Request<never, never, AddProblemInput['body']>, r
     images,
     location: {
       type: "Point",
-      coordinates: [lat,long],
+      coordinates,
     },
     postType,
     problemTag
@@ -38,6 +38,7 @@ const createPost = async (req: Request<never, never, AddProblemInput['body']>, r
     response.data = post
   }
   
+  res.status(response.statusCode).json(response)
 }
 
 
