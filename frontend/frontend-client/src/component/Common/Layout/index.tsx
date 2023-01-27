@@ -1,13 +1,16 @@
 import React from "react";
 import Navbar from "../Navbar";
 
-type IProps = {
+interface Props {
   children: React.ReactNode;
-};
-const Layout = ({ children }: IProps) => {
+}
+
+const Layout = ({ children }: Props) => {
   return (
     <div>
-      <Navbar />
+      <div className="pb-16">
+        <Navbar />
+      </div>
       {children}
     </div>
   );
