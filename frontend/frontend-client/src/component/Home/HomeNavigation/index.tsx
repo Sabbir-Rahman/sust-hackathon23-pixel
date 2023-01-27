@@ -6,7 +6,10 @@ const HomeNavigation = () => {
     <div>
       <div className="fixed top-24 right-10">
         <div className="bg-white shadow-md rounded-2xl p-4 w-[300px] h-[300px] flex flex-col justify-between">
-          <img src="/assets/sampleMap.png" className="h-[200px] rounded-xl" />
+          <img
+            src="/assets/heatmap_lightbox 1.png"
+            className="h-[200px] rounded-xl"
+          />
           <button className="inline-block bg-accent py-3 text-sm font-medium text-white rounded-xl">
             Expand
           </button>

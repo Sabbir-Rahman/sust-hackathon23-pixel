@@ -7,7 +7,7 @@ import PostForm from "../component/Home/PostForm";
 const HomePage = () => {
   return (
     <Layout>
-      <div className="w-full bg-bgColor flex">
+      <div className="w-full bg-bgColor flex min-h-screen">
         {/* Post Problem */}
         <div className="w-1/4">
           <PostForm />
