@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import SubscriptionPage from './pages/SubscriptionPage';
 import MarketPlace from './pages/MarketPlace';
 import ServiceDetails from './component/MarketPlace/ServiceDetails';
+import SellerSignUp from './pages/SellerAuthPages/SellerSignup';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path='/market' element={<MarketPlace />} />
         <Route path='/market/:id' element={<ServiceDetails />} />
         <Route path='/subscription-page' element={<SubscriptionPage />} />
+        <Route path='/seller-signup' element={<SellerSignUp />} />
       </Routes>
     </div>
   );
