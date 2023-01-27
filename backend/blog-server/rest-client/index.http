@@ -5,3 +5,41 @@ GET http://localhost:5000/
 # Test api router, controller and service
 GET http://localhost:5000/api/test
 ###
+
+# admin api router, user login
+# @name userLogin
+POST http://localhost:5000/api/v1/user/login
+Content-Type: application/json 
+
+{ 
+  "email": "test@email.com",
+  "password": "123456"
+}
+###
+
+# blog service add post
+POST http://localhost:5001/post/create
+Authorization: {{userLogin.response.body.data.accessToken}}
+Content-Type: application/json 
+
+{
+  "title": "Test post far",
+  "descryption": "Test post 5 descryption",
+  "coordinates": [ -110.1571442, 32.2586857 ],
+  "postType": "complain",
+  "problemTag": "ocean pollution"
+}
+###
+
+###
+
+# blog service view post within a radius
+POST http://localhost:5001/post/view/radius
+Authorization: {{userLogin.response.body.data.accessToken}}
+Content-Type: application/json 
+
+{
+  "radius": 5,
+  "centerCoordinate": [ -110.1571442, 32.2586857 ]
+}
+###
