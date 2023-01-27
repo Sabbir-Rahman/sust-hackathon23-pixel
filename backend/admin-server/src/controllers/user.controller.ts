@@ -22,6 +22,7 @@ async function createUser(
   
   let username = req.body.nickName.toLowerCase()
   let isUserExist = await userService.findUserByUserName(username)
+  
   while (isUserExist) {
     username = await randomTextUtils.generateRandomString(username,3)
     isUserExist = await userService.findUserByUserName(username)

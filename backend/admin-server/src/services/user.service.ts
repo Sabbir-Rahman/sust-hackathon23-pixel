@@ -28,23 +28,23 @@ async function findUserByUserId(userId: string): Promise<UserDoc | ModelError> {
 
 async function findUserByUserName(
   username: string
-): Promise<UserDoc | ModelError> {
+): Promise<boolean> {
   try {
     const user = await UserModel.findOne({ username }).orFail()
-    return user
+    return true
   } catch (error) {
     logServiceError('findUserByUserId', FILENAME, String(error))
-    return new ModelError(error)
+    return false
   }
 }
 
-async function findUserByEmail(email: string): Promise<UserDoc | ModelError> {
+async function findUserByEmail(email: string): Promise<boolean> {
   try {
     const user = await UserModel.findOne({ email }).orFail()
-    return user
+    return true
   } catch (error) {
     logServiceError('findUserByEmail', FILENAME, String(error))
-    return new ModelError(error)
+    return false
   }
 }
 
@@ -54,9 +54,8 @@ const loginUser = async (
 ): Promise<any | ModelError> => {
   try {
     const user = await UserModel.findOne({
-      email,
+      email
     }).orFail()
-
     const isPassMatch = await bcryptUtils.comparePassword(
       user.password,
       password
