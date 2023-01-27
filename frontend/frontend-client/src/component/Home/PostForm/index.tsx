@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 const PostForm = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('Select Category');
   const categories = ['Human', 'Social', 'Economic', 'Environment'];
+
+  //   const [file, setFile] = useState(null);
+  //   const filePickerRef = useRef();
+
+  //   const pickImageHandler = () => {
+  //     console.log(filePickerRef.current);
+  //     filePickerRef.current.click();
+  //   };
+
+  //   const handleImage = async (event) => {
+  //     if (event.target.files && event.target.files.length === 1) {
+  //       setFile(event.target.files[0]);
+  //     }
+  //   };
+
   return (
     <div className='overflow-y-scroll h-[80%] w-[22%] bg-white shadow rounded-lg  fixed top-20'>
       <div className=' text-black p-4'>
@@ -65,7 +80,11 @@ const PostForm = () => {
           </div>
         </div>
         <div className='flex align-center justify-between mt-10'>
-          <img src='/assets/svg/Add Photo Camera.svg' alt='camera' />
+          <img
+            src='/assets/svg/Add Photo Camera.svg'
+            alt='camera'
+            className='cursor-pointer'
+          />
           <div className='bg-accent text-white w-2/4 h-10 rounded-lg flex align-center justify-center pt-2 cursor-pointer cursor-pointer transition ease-in-out delay-50 hover:bg-darkAccent'>
             Post
           </div>
