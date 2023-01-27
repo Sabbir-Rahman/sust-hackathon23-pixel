@@ -3,6 +3,7 @@ import { object, TypeOf, z } from 'zod'
 export const addUserSchema = object({
   body: object({
     name: z.string(),
+    nickName: z.string(),
     password: z.string(),
     email: z.string(),
   }),
