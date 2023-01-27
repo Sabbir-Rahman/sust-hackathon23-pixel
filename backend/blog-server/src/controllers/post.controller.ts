@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import fs from 'fs'
 import util from 'util'
-import { s3Bucket } from '../utils'
+import { ldaTag, s3Bucket } from '../utils'
 import { Post } from '../interfaces/blog'
 import { postService } from '../services'
 import ModelError from '../utils/ModelError'
@@ -25,6 +25,8 @@ const createPost = async (
   console.log(res.locals.user)
   const { title, descryption, images, postType, problemTag, coordinates } =
     req.body
+  
+  const tags = ldaTag.descryptionLdaTagCreation(descryption)
   const postObj: Post = {
     userId: res.locals.user.userId,
     name: res.locals.user.name,
@@ -36,6 +38,7 @@ const createPost = async (
       type: 'Point',
       coordinates,
     },
+    tags,
     postType,
     problemTag,
   }
