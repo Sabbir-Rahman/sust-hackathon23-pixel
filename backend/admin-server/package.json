@@ -8,7 +8,8 @@
     "start": "env TZ='Asia/Dhaka' cross-env NODE_PATH=dist/ node ./dist/src/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "format": "prettier --write . --config ./.prettierrc",
-    "test": "jest"
+    "test": "jest",
+    "ts-coverage": "typescript-coverage-report"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "nodemon": "^2.0.20",
     "supertest": "^6.3.3",
     "ts-jest": "^29.0.3",
+    "typescript-coverage-report": "^0.7.0",
     "winston": "^3.8.2",
     "zod": "^3.20.2"
   },
