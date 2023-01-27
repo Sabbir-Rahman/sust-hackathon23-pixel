@@ -1,12 +1,12 @@
 export const forwardGeocoding = async (address: any) => {
   const ACCESS_TOKEN =
-    'pk.eyJ1IjoiaWJ0aWRyYWhtYW4iLCJhIjoiY2tibzZ1dmJoMXptMzM1cXZmZWl6c2d3YyJ9.MQFAvX513awEJnETltcXEQ';
+    "pk.eyJ1IjoiaWJ0aWRyYWhtYW4iLCJhIjoiY2tibzZ1dmJoMXptMzM1cXZmZWl6c2d3YyJ9.MQFAvX513awEJnETltcXEQ";
   var url =
-    'https://api.mapbox.com/geocoding/v5/mapbox.places/' +
+    "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
     encodeURIComponent(address) +
-    '.json?access_token=' +
+    ".json?access_token=" +
     ACCESS_TOKEN +
-    '&limit=1';
+    "&limit=1";
 
   //   const response = await request(
   //     { url: url, json: true },
@@ -31,8 +31,9 @@ export const forwardGeocoding = async (address: any) => {
   //   );
   const response = await fetch(url);
   const data = await response.json();
-  let longitude = data.features[0].center[0];
-  let latitude = data.features[0].center[1];
+  let longitude = data.features[0]?.center[0];
+
+  let latitude = data.features[0]?.center[1];
 
   return { longitude, latitude };
 };

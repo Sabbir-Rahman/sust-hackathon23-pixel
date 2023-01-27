@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getAccessToken = () => {
+export const getAccessToken = () => {
   let tokens = localStorage.getItem("hackathon");
   if (tokens) {
     const token = JSON.parse(tokens)["accessToken"];

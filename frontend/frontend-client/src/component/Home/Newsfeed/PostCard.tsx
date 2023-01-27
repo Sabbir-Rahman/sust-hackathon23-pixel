@@ -1,17 +1,18 @@
 import {
+  ChatAlt2Icon,
   ChevronDoubleDownIcon,
   ChevronDoubleUpIcon,
-  ReplyIcon,
-  CheckIcon,
   LocationMarkerIcon,
-  ChatAlt2Icon,
+  ReplyIcon,
 } from "@heroicons/react/outline";
+
 import Menu from "./Menu";
 type IProps = {
-  imgUrl?: string;
   post: any;
 };
-const PostCard = ({ imgUrl, post }: IProps) => {
+const PostCard = ({ post }: IProps) => {
+  console.log(post);
+
   return (
     <div className="bg-white shadow-lg rounded-2xl px-8 py-6 border-b-4 border-accent relative">
       {/* Menu */}
@@ -30,11 +31,13 @@ const PostCard = ({ imgUrl, post }: IProps) => {
               <p className="text-lightGray">Uttara, Dhaka</p>
             </div>
           </div>
-          <p className="text-[10px] text-lightGray mb-2 pl-1">dane@gmail.com</p>
+          <p className="text-[10px] text-lightGray mb-2 pl-1">
+            {post?.isAnonymous ? "Anonymous User" : post?.name}
+          </p>
           <div>
-            {imgUrl && (
+            {post.images.length > 0 && (
               <img
-                src={imgUrl}
+                src={`http://167.172.79.117/backend-blog/post/view/image/${post.images[0]}`}
                 alt="post-image"
                 className="w-full h-[250px] object-cover rounded-xl mb-4"
               />

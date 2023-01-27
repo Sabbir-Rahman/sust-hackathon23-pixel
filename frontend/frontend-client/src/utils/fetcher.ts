@@ -15,9 +15,8 @@ export default async function fetcher(url: any) {
     const res = await axios.get(url, {
       baseURL: "http://167.172.79.117",
       headers: {
-        Authorization: `Bearer ${getAccessToken()}`,
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     });
     return res?.data;
