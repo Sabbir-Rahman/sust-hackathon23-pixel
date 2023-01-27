@@ -1,0 +1,32 @@
+# Test api homepage
+GET http://localhost:5000/
+###
+
+# Test api router, controller and service
+GET http://localhost:5000/api/test
+###
+
+# admin api router, user login
+# @name userLogin
+POST http://localhost:5000/api/v1/user/login
+Content-Type: application/json 
+
+{ 
+  "email": "test@email.com",
+  "password": "123456"
+}
+###
+
+# blog service add post
+POST http://localhost:5001/post/create
+Authorization: {{userLogin.response.body.data.accessToken}}
+Content-Type: application/json 
+
+{
+  "title": "Test post5",
+  "descryption": "Test post 5 descryption",
+  "coordinates": [24.912, 91.875],
+  "postType": "complain",
+  "problemTag": "ocean pollution"
+}
+###
