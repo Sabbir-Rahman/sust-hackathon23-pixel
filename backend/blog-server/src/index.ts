@@ -3,6 +3,7 @@ import cors from 'cors'
 import { postRouter, testRouter } from './routers'
 import { logInfo } from '../logger/customLogger'
 import connect from './utils/mongodbConnect'
+import cors from 'cors'
 require('dotenv').config()
 
 const app = express()
