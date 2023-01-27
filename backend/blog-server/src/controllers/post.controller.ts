@@ -27,6 +27,8 @@ const createPost = async (
     req.body
   const postObj: Post = {
     userId: res.locals.user.userId,
+    nickName: res.locals.user.nickName,
+    isAnonymous: res.locals.user.isAnonymous,
     title,
     descryption,
     images,
