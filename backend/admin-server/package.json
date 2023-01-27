@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p .",
-    "start": "env TZ='Asia/Dhaka' cross-env NODE_PATH=dist/ node ./dist/src/app.js",
+    "start": "env TZ='Asia/Dhaka' cross-env NODE_PATH=dist/ node ./dist/src/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "format": "prettier --write . --config ./.prettierrc",
     "test": "jest"
