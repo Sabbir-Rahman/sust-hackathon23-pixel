@@ -12,14 +12,18 @@
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@types/leaflet": "^1.9.0",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^1.2.5",
     "leaflet": "^1.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-error-overlay": "^6.0.11",
+    "react-hot-toast": "^2.4.0",
     "react-leaflet": "^4.2.0",
-    "react-router-dom": "^6.7.0"
+    "react-router-dom": "^6.8.0"
   },
   "devDependencies": {
+    "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",

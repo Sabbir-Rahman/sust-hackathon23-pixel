@@ -13,3 +13,12 @@ export const addPostSchema = object({
 
 export type AddProblemInput = TypeOf<typeof addPostSchema>
 
+export const viewPostDataWithinRadiusSchema = object({
+  body: object({
+    radius: z.number(),
+    centerCoordinate: z.array(z.number()),
+  }),
+})
+
+export type viewPostDataWithinRadiusSchemaInput = TypeOf<typeof viewPostDataWithinRadiusSchema>
+

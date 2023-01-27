@@ -1,5 +1,4 @@
 import React from 'react';
-
 const AddServiceDetails = () => {
   return (
     <div className='flex w-screen h-screen'>
