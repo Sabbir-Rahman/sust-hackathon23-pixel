@@ -3,6 +3,7 @@ import { API } from '../../../api/API';
 import { forwardGeocoding } from '../../../utils/location';
 
 interface IFormData {
+  anonymous: boolean;
   location: string;
   descryption: string;
   coordinates: Number[] | undefined;
@@ -16,12 +17,48 @@ const PostForm = () => {
   const [selectedCategory, setSelectedCategory] = useState('Select Category');
   const categories = ['Human', 'Social', 'Economic', 'Environment'];
   const [formData, setFormData] = useState<IFormData>({
+    anonymous: false,
     location: '',
     descryption: '',
     coordinates: [],
     postType: 'complain',
     problemTag: selectedCategory,
   });
+
+  const [file, setFile] = useState<any>(null);
+
+  const filePickerRef = useRef<HTMLInputElement>(null);
+
+  const pickImageHandler = () => {
+    console.log(filePickerRef.current);
+    filePickerRef.current!.click();
+  };
+
+  const handleImage = async (event: any) => {
+    if (event.target.files && event.target.files.length === 1) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+  const onClickSaveImage = async () => {
+    const data = new FormData();
+    // data.append('image', file, file.name);
+    // const response = await dispatch(
+    //   actions.uploadProfileImage,
+    //   {},
+    //   data,
+    //   contextStore.user.token
+    // );
+    // console.log(response);
+    // if (response.errors) {
+    //   return;
+    // }
+    // const user = { ...response, token: contextStore.user.token };
+    // setContextStore({ ...contextStore, user });
+    // setShowSpinner(false);
+    // localStorage.setItem('user', JSON.stringify(user));
+    setFile(null);
+  };
 
   const onChangeFormData = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,6 +80,12 @@ const PostForm = () => {
 
   const createPost = async () => {
     //
+    const data = new FormData();
+    data.append('image', file || '', file!.name || '');
+    data.append('descryption', formData.descryption);
+    data.append('postType', formData.postType);
+    data.append('problemTag', formData.problemTag);
+    data.append('anonymous', new Boolean(formData.anonymous).toString());
 
     if (!formData.coordinates) {
       let geolocation = await forwardGeocoding(formData.location);
@@ -142,11 +185,43 @@ const PostForm = () => {
             />
           </div>
         </div>
+        <div
+          className='flex items-center mt-4 cursor-pointer'
+          onClick={() => {
+            const data = formData.anonymous;
+            console.log(data);
+            setFormData({ ...formData, anonymous: !data });
+          }}>
+          <div
+            className={`h-4 w-4 border-2 rounded-sm mr-2 ${
+              formData.anonymous ? 'bg-accent' : ''
+            }`}></div>
+          <div className='text-xs font-bold'>Post as Anonymous</div>
+        </div>
+        {file && (
+          <img
+            src={URL.createObjectURL(file)}
+            alt='camera'
+            className='w-1/2 mt-5'
+          />
+        )}
         <div className='flex align-center justify-between mt-10'>
           <img
-            src='/assets/svg/Add Photo Camera.svg'
+            src={'/assets/svg/Add Photo Camera.svg'}
             alt='camera'
             className='cursor-pointer'
+            onClick={pickImageHandler}
+          />
+          <input
+            style={{ display: 'none' }}
+            ref={filePickerRef}
+            type='file'
+            className='profile-img__input'
+            id='image'
+            name='image'
+            placeholder='Choose the image'
+            accept='.jpg,.png,.jpeg'
+            onChange={handleImage}
           />
           <div
             className='bg-accent text-white w-2/4 h-10 rounded-lg flex align-center justify-center pt-2 cursor-pointer transition ease-in-out delay-50 hover:bg-darkAccent'
