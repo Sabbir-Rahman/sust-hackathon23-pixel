@@ -8,7 +8,7 @@ GET http://localhost:5000/api/test
 
 # admin api router, user login
 # @name userLogin
-POST http://localhost:5000/api/v1/user/login
+POST http://167.172.79.117/backend-admin/api/v1/user/login
 Content-Type: application/json 
 
 { 
@@ -18,7 +18,7 @@ Content-Type: application/json
 ###
 
 # blog service add post
-POST http://localhost:5001/post/create
+POST http://167.172.79.117/backend-blog/post/create
 Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 ###
 
 # blog service view post within a radius
-POST http://localhost:5001/post/view/radius
+POST http://167.172.79.117/backend-blog/post/view/radius
 Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 
@@ -45,7 +45,7 @@ Content-Type: application/json
 ###
 
 # blog service view all post data global
-GET http://localhost:5001/post/view/global?title=Test post5
+GET http://167.172.79.117/backend-blog/post/view/global?title=Test post5
 Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 
