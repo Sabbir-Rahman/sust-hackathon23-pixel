@@ -6,23 +6,46 @@ import HomePage from './pages/HomePage';
 import SubscriptionPage from './pages/SubscriptionPage';
 import MarketPlace from './pages/MarketPlace';
 import ServiceDetails from './component/MarketPlace/ServiceDetails';
-import SellerSignUp from './pages/SellerAuthPages/SellerSignup';
-import SellerRegister from './pages/SellerAuthPages/SellerRegister';
-import AddServiceDetails from './pages/SellerAuthPages/AddServiceDetails';
+import PrivateRoute from './utils/PrivateRoute';
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Route
+          path='/'
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/market' element={<MarketPlace />} />
-        <Route path='/market/:id' element={<ServiceDetails />} />
-        <Route path='/subscription-page' element={<SubscriptionPage />} />
-        <Route path='/seller-signup' element={<SellerSignUp />} />
-        <Route path='/seller-signin' element={<SellerRegister />} />
-        <Route path='/add-service-details' element={<AddServiceDetails />} />
+        <Route
+          path='/market'
+          element={
+            <PrivateRoute>
+              <MarketPlace />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/market/:id'
+          element={
+            <PrivateRoute>
+              <ServiceDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/subscription'
+          element={
+            <PrivateRoute>
+              <SubscriptionPage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );

@@ -1,9 +1,13 @@
 import { LocationMarkerIcon, StarIcon } from "@heroicons/react/outline";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductCard = () => {
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-100 shadow-sm">
+    <Link
+      to="/market/1"
+      className="overflow-hidden rounded-lg border border-gray-100 shadow-sm"
+    >
       <img
         alt="Product Image"
         src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
@@ -26,7 +30,7 @@ const ProductCard = () => {
           <StarIcon className="h-4 w-4 text-accent" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
