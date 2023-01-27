@@ -3,7 +3,7 @@ import Layout from "../component/Common/Layout";
 const HomePage = () => {
   return (
     <Layout>
-      <div className="w-full bg-bgColor flex h-[150vh]">
+      <div className="w-full bg-bgColor flex">
         {/* Post Problem */}
         <div className="bg-red-400 w-1/4">1</div>
         {/* Newsfeed */}
