@@ -2,9 +2,11 @@ import express from 'express'
 import { postRouter, testRouter } from './routers'
 import { logInfo } from '../logger/customLogger'
 import connect from './utils/mongodbConnect'
+import cors from 'cors'
 require('dotenv').config()
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 app.use(
   express.urlencoded({
