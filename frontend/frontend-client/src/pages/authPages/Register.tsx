@@ -1,11 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [userInfo, setUserInfo] = useState({
+    name: "",
+    nickName: "",
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleOnChange = (e: any) => {
     const { value, id } = e.target;
@@ -20,13 +26,15 @@ const Register = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
+      await axios.post(
         `http://167.172.79.117/backend-admin/api/v1/user/create`,
         userInfo
       );
-      console.log(data);
+      toast.success("Account created successfully");
+      navigate("/login");
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -46,6 +54,40 @@ const Register = () => {
         <h1 className="text-4xl font-semibold text-center mb-4">Sign Up</h1>
         <form className="mt-10 w-80" onSubmit={handleSubmit}>
           <div className="flex items-center gap-8 flex-col">
+            <div className="w-full">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                className="authInput"
+                value={userInfo.name}
+                onChange={handleOnChange}
+                required
+              />
+            </div>
+            <div className="w-full">
+              <label
+                htmlFor="nickName"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Nick Name
+              </label>
+
+              <input
+                type="text"
+                id="nickName"
+                className="authInput"
+                value={userInfo.nickName}
+                onChange={handleOnChange}
+                required
+              />
+            </div>
             <div className="w-full">
               <label
                 htmlFor="Email"

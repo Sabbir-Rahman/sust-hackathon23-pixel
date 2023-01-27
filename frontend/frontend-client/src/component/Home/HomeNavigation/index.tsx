@@ -1,4 +1,5 @@
 import { ShoppingBagIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 
 const HomeNavigation = () => {
   return (
@@ -25,9 +26,12 @@ const HomeNavigation = () => {
             <img src="/assets/svg/control.svg" className="h-4 w-4" />
             <p>Pest Control</p>
           </div>
-          <button className="inline-block bg-accent py-3 text-sm font-medium text-white rounded-xl">
+          <Link
+            to="/market"
+            className="inline-block bg-accent py-3 text-sm font-medium text-white rounded-xl text-center"
+          >
             See More
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -8,7 +8,9 @@ type IProps = {
 
 const PrivateRoute = ({ children }: IProps) => {
   const { user } = useAuthContext();
-  return <>{user ? children : <Navigate to="/" />}</>;
+  return (
+    <>{Object.keys(user).length > 0 ? children : <Navigate to="/login" />}</>
+  );
 };
 
 export default PrivateRoute;
