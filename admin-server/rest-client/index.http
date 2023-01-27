@@ -1,0 +1,7 @@
+# Test api homepage
+GET http://localhost:5000/
+###
+
+# Test api router, controller and service
+GET http://localhost:5000/api/test
+###
