@@ -1,0 +1,310 @@
+{
+  "fileCounts": {},
+  "anys": [
+    {
+      "file": "config/default.ts",
+      "line": 2,
+      "character": 18,
+      "text": "config",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/jwt.ts",
+      "line": 30,
+      "character": 15,
+      "text": "e",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/jwt.ts",
+      "line": 30,
+      "character": 17,
+      "text": "message",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/jwt.ts",
+      "line": 27,
+      "character": 11,
+      "text": "e",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 16,
+      "character": 20,
+      "text": "file",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 18,
+      "character": 41,
+      "text": "file",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 18,
+      "character": 46,
+      "text": "path",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 23,
+      "character": 4,
+      "text": "Key",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 23,
+      "character": 9,
+      "text": "file",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 23,
+      "character": 14,
+      "text": "filename",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 29,
+      "character": 23,
+      "text": "fileKey",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 31,
+      "character": 4,
+      "text": "Key",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/s3.ts",
+      "line": 31,
+      "character": 9,
+      "text": "fileKey",
+      "kind": 1
+    },
+    {
+      "file": "middlewires/auth.ts",
+      "line": 25,
+      "character": 17,
+      "text": "user",
+      "kind": 1
+    },
+    {
+      "file": "middlewires/auth.ts",
+      "line": 26,
+      "character": 12,
+      "text": "jwtRoles",
+      "kind": 1
+    },
+    {
+      "file": "middlewires/auth.ts",
+      "line": 26,
+      "character": 34,
+      "text": "user",
+      "kind": 1
+    },
+    {
+      "file": "middlewires/auth.ts",
+      "line": 26,
+      "character": 39,
+      "text": "role",
+      "kind": 1
+    },
+    {
+      "file": "middlewires/auth.ts",
+      "line": 27,
+      "character": 46,
+      "text": "jwtRoles",
+      "kind": 1
+    },
+    {
+      "file": "middlewires/auth.ts",
+      "line": 27,
+      "character": 55,
+      "text": "includes",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 5,
+      "character": 34,
+      "text": "message",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 5,
+      "character": 43,
+      "text": "timestamp",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 6,
+      "character": 8,
+      "text": "errorMessages",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 6,
+      "character": 24,
+      "text": "message",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 6,
+      "character": 32,
+      "text": "split",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 8,
+      "character": 27,
+      "text": "timestamp",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 8,
+      "character": 59,
+      "text": "errorMessages",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 8,
+      "character": 90,
+      "text": "errorMessages",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 8,
+      "character": 117,
+      "text": "errorMessages",
+      "kind": 1
+    },
+    {
+      "file": "logger/logger.ts",
+      "line": 8,
+      "character": 147,
+      "text": "errorMessages",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 24,
+      "character": 25,
+      "text": "user",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 28,
+      "character": 23,
+      "text": "user",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 28,
+      "character": 28,
+      "text": "userId",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 29,
+      "character": 21,
+      "text": "user",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 29,
+      "character": 26,
+      "text": "name",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 30,
+      "character": 28,
+      "text": "user",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 30,
+      "character": 33,
+      "text": "isAnonymous",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 123,
+      "character": 8,
+      "text": "filesInfo",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 126,
+      "character": 22,
+      "text": "filesInfo",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 126,
+      "character": 32,
+      "text": "length",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 127,
+      "character": 45,
+      "text": "filesInfo",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 129,
+      "character": 21,
+      "text": "filesInfo",
+      "kind": 1
+    },
+    {
+      "file": "src/controllers/post.controller.ts",
+      "line": 129,
+      "character": 34,
+      "text": "path",
+      "kind": 1
+    },
+    {
+      "file": "src/index.ts",
+      "line": 5,
+      "character": 18,
+      "text": "config",
+      "kind": 1
+    }
+  ],
+  "percentage": 95.99254426840633,
+  "total": 1073,
+  "covered": 1030,
+  "uncovered": 43
+}

@@ -1,0 +1,202 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>post.controller.ts</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/controllers/post.controller.ts</td><td class="">95.65%</td><td class="">80%</td><td class="">299</td><td class="">286</td><td class="">13</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { Request, Response } from &#x27;express&#x27;
+import fs from &#x27;fs&#x27;
+import util from &#x27;util&#x27;
+import { s3Bucket } from &#x27;../utils&#x27;
+import { Post } from &#x27;../interfaces/blog&#x27;
+import { postService } from &#x27;../services&#x27;
+import ModelError from &#x27;../utils/ModelError&#x27;
+import { AddProblemInput, viewPostDataWithinRadiusSchemaInput } from &#x27;../validators/post&#x27;
+import { Key } from &#x27;../interfaces/type&#x27;
+
+const unlinkFile = util.promisify(fs.unlink)
+
+const createPost = async (
+  req: Request&lt;never, never, AddProblemInput[&#x27;body&#x27;]&gt;,
+  res: Response
+): Promise&lt;void&gt; =&gt; {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: &#x27;Create post not successfull&#x27;,
+    developerMessage: &#x27;&#x27;,
+    isReadOnly: false,
+    data: {},
+  }
+  console.log(res.locals.user)
+  const { title, descryption, images, postType, problemTag, coordinates } =
+    req.body
+  const postObj: Post = {
+    userId: res.locals.user.userId,
+    name: res.locals.user.name,
+    isAnonymous: res.locals.user.isAnonymous,
+    title,
+    descryption,
+    images,
+    location: {
+      type: &#x27;Point&#x27;,
+      coordinates,
+    },
+    postType,
+    problemTag,
+  }
+  const post = await postService.createPost(postObj)
+
+  if (post instanceof ModelError) {
+    response.developerMessage = post.error
+  } else {
+    response.isSuccess = true
+    response.message = &#x27;Post created succesfully&#x27;
+    response.statusCode = 200
+    response.data = post
+  }
+
+  res.status(response.statusCode).json(response)
+}
+
+const viewPostWithinaRadius = async (
+  req: Request&lt;never, never, viewPostDataWithinRadiusSchemaInput[&#x27;body&#x27;]&gt;,
+  res: Response
+): Promise&lt;void&gt; =&gt; {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: &#x27;View post with radius not successfull&#x27;,
+    developerMessage: &#x27;&#x27;,
+    isReadOnly: false,
+    data: {},
+  }
+
+  const post = await postService.findMapDataWithLocation(req.body.centerCoordinate,req.body.radius)
+
+  if (post instanceof ModelError) {
+    response.developerMessage = post.error
+  } else {
+    response.isSuccess = true
+    response.message = &#x27;View post with radius succesfully&#x27;
+    response.statusCode = 200
+    response.data = post
+  }
+
+  res.status(response.statusCode).json(response)
+}
+
+const viewGlobalPostData = async (
+  req: Request&lt;never, never, never&gt;,
+  res: Response
+): Promise&lt;void&gt; =&gt; {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: &#x27;View global post not successfull&#x27;,
+    developerMessage: &#x27;&#x27;,
+    isReadOnly: false,
+    data: {},
+  }
+
+  const post = await postService.findGlobalData(req.query)
+
+  if (post instanceof ModelError) {
+    response.developerMessage = post.error
+  } else {
+    response.isSuccess = true
+    response.message = &#x27;View global post succesful&#x27;
+    response.statusCode = 200
+    response.data = post
+  }
+
+  res.status(response.statusCode).json(response)
+}
+
+const uploadPostImages = async (
+  req: Request&lt;never, never, never&gt;,
+  res: Response
+) =&gt; {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: &#x27;Upload images not succesfull&#x27;,
+    developerMessage: &#x27;&#x27;,
+    isReadOnly: false,
+    data: {},
+  }
+
+  const { title } = req.params
+  const filesInfo: any = req.files
+  const filesKey = []
+
+  for (let i = 0; i &lt; filesInfo.length; i++) {
+    const result = await s3Bucket.uploadFile(filesInfo[i])
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    await unlinkFile(filesInfo[i].path)
+    if (result) {
+      filesKey.push(result.Key)
+    }
+  }
+
+  if (filesKey.length &gt; 0) {
+    response.data = filesKey
+    response.statusCode = 200
+    response.isSuccess = true
+    response.message = &#x27;Image upload successfull&#x27;
+  }
+
+  res.status(response.statusCode).json(response)
+}
+
+const viewImage = async (
+  req: Request&lt;Key, never, never&gt;,
+  res: Response
+): Promise&lt;any&gt; =&gt; {
+  const { key } = req.params
+
+  const readstram = s3Bucket.getFileStream(key)
+
+  readstram.pipe(res)
+}
+
+const searchWithDescryption = async (
+  req: Request&lt;never, never, never&gt;,
+  res: Response
+): Promise&lt;any&gt; =&gt; {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: &#x27;Search with descryption not succesfull&#x27;,
+    developerMessage: &#x27;&#x27;,
+    isReadOnly: false,
+    data: {},
+  }
+  const { descryption } = req.query
+  console.log(descryption)
+  const postData = await postService.searchPostWithTextDescryption(String(descryption))
+
+  if (postData instanceof ModelError) {
+    response.developerMessage = postData.error
+  } else {
+    response.data = postData
+    response.statusCode = 200
+    response.isSuccess = true
+    response.message = &#x27;Search with descryption successfull&#x27;
+  }
+  res.status(response.statusCode).json(response)
+}
+
+export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages, searchWithDescryption }
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:24,&quot;character&quot;:25,&quot;text&quot;:&quot;user&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:28,&quot;character&quot;:23,&quot;text&quot;:&quot;user&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:28,&quot;character&quot;:28,&quot;text&quot;:&quot;userId&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:29,&quot;character&quot;:21,&quot;text&quot;:&quot;user&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:29,&quot;character&quot;:26,&quot;text&quot;:&quot;name&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:30,&quot;character&quot;:28,&quot;text&quot;:&quot;user&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:30,&quot;character&quot;:33,&quot;text&quot;:&quot;isAnonymous&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:123,&quot;character&quot;:8,&quot;text&quot;:&quot;filesInfo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:126,&quot;character&quot;:22,&quot;text&quot;:&quot;filesInfo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:126,&quot;character&quot;:32,&quot;text&quot;:&quot;length&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:127,&quot;character&quot;:45,&quot;text&quot;:&quot;filesInfo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:129,&quot;character&quot;:21,&quot;text&quot;:&quot;filesInfo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/controllers/post.controller.ts&quot;,&quot;line&quot;:129,&quot;character&quot;:34,&quot;text&quot;:&quot;path&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Fri, 27 Jan 2023 21:49:36 GMT</p>
+    </body>
+  </html>
+  
