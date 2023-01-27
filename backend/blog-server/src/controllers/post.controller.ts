@@ -6,7 +6,7 @@ import { Post } from '../interfaces/blog'
 import { postService } from '../services'
 import ModelError from '../utils/ModelError'
 import { AddProblemInput, viewPostDataWithinRadiusSchemaInput } from '../validators/post'
-import { Key } from '../interfaces/type'
+import { Key, PostId } from '../interfaces/type'
 
 const unlinkFile = util.promisify(fs.unlink)
 
@@ -181,4 +181,35 @@ const searchWithDescryption = async (
   res.status(response.statusCode).json(response)
 }
 
-export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages, searchWithDescryption }
+const upVoteThePost = async (
+  req: Request<PostId, never, never>,
+  res: Response
+): Promise<any> => {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: 'Post upvote not successfull',
+    developerMessage: '',
+    isReadOnly: false,
+    data: {},
+  }
+
+  const upVotePost = await postService.upvote(req.params.postId)
+
+  if (upVotePost instanceof ModelError) {
+    response.developerMessage = upVotePost.error
+  } else {
+    const upvoteUser = await postService.upvoteUser(res.locals.user.userId)
+    
+    if (upvoteUser instanceof ModelError) {
+      response.developerMessage = upvoteUser.error
+    }
+    response.data = {upvoteUser,upVotePost}
+    response.statusCode = 200
+    response.isSuccess = true
+    response.message = 'Post upvote successfull'
+  }
+  res.status(response.statusCode).json(response)
+}
+
+export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages, searchWithDescryption,upVoteThePost }

@@ -27,4 +27,9 @@ router.post(
   [auth(['user']), upload.any()],
   postController.uploadPostImages
 )
+router.post(
+  '/upvote/:postId',
+  auth(['user']),
+  postController.upVoteThePost
+)
 export default router

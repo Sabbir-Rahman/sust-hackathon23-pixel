@@ -28,3 +28,19 @@ export interface Post {
 }
 
 export type PostDoc = Post & CorrectedDocument
+
+export interface User {
+  name: string
+  username: string
+  nickName: string
+  password: string
+  image?: string
+  totalUpvoteCount?: number
+  totalRepostCount?: number
+  email: string
+  role: string[]
+  isEmailVerified?: boolean
+  isVerified?: boolean
+}
+
+export type UserDoc = User & CorrectedDocument

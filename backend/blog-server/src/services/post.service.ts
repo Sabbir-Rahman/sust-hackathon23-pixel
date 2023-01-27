@@ -1,6 +1,7 @@
 import { logServiceError } from '../../logger/customLogger'
 import { Post, PostDoc } from '../interfaces/blog'
 import PostModel from '../models/post'
+import UserModel from '../models/user'
 import ModelError from '../utils/ModelError'
 
 const FILENAME = 'blog-server/src/services/post.service.ts'
@@ -60,9 +61,44 @@ async function searchPostWithTextDescryption(
     return new ModelError(error)
   }
 }
+
+const upvoteUser = async (userId: string) => {
+  try {
+    const upvote = await UserModel.updateOne(
+      {
+        _id: userId,
+      },
+      { $inc: { totalUpvoteCount: 1 } }
+    ).orFail()
+
+    return upvote
+  } catch (error) {
+    logServiceError('upvoteUser', FILENAME, String(error))
+    return new ModelError(error)
+  }
+}
+
+const upvote = async (id: string) => {
+  try {
+    const userFoodPackage = await PostModel.updateOne(
+      {
+        _id: id,
+      },
+      { $inc: { 'reactions.upvote': 1 } }
+    ).orFail()
+
+    return userFoodPackage
+  } catch (error) {
+    logServiceError('decreaseFoodCount', FILENAME, String(error))
+    return new ModelError(error)
+  }
+}
+
 export default {
   createPost,
   findMapDataWithLocation,
   findGlobalData,
   searchPostWithTextDescryption,
+  upvote,
+  upvoteUser
 }

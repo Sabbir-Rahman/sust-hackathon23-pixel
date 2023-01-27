@@ -58,3 +58,8 @@ Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 
 ###
+
+# blog service add post
+POST http://localhost:5001/post/upvote/63d4165af466520057477cb0
+Authorization: {{userLogin.response.body.data.accessToken}}
+Content-Type: application/json
