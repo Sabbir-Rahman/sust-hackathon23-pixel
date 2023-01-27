@@ -49,10 +49,14 @@ async function searchPostWithTextDescryption(
   descryption: string
 ): Promise<PostDoc[] | ModelError> {
   try {
-    const postData = await PostModel.find({descryption: `/${descryption}/`})
+    const postData = await PostModel.find({descryption: /descryption/})
     return postData
   } catch (error) {
-    logServiceError('findGlobalData', FILENAME, String(error))
+    logServiceError(
+      'searchPostWithTextDescryption',
+      FILENAME,
+      String(error)
+    )
     return new ModelError(error)
   }
 }
