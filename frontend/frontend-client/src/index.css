@@ -6,6 +6,9 @@
   .authInput {
     @apply mt-1 w-full outline-none bg-white text-sm text-darkGray px-4 py-3 border-[1px] border-gray-200 focus:border-2 focus:border-blue rounded-xl;
   }
+  .newsFeedIcon {
+    @apply w-4 h-4 text-[#A3A3A3];
+  }
 }
 
 .leaflet-container {

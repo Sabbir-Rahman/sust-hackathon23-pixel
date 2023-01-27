@@ -9,7 +9,8 @@ module.exports = {
       colors: {
         blue: "#5167F6",
         darkGray: "#131316",
-        accent: "#5BB462",
+        lightGray: "#878787",
+        accent: "#56D160",
         darkAccent: "#5b9851",
         bgColor: "#F5F5F5",
       },
