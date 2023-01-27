@@ -1,5 +1,6 @@
 import Layout from "../component/Common/Layout";
 import HomeNavigation from "../component/Home/HomeNavigation";
+import SearchFilter from "../component/Home/HomeNavigation/SearchFilter";
 import NewsFeed from "../component/Home/Newsfeed";
 
 import PostForm from "../component/Home/PostForm";
@@ -11,6 +12,7 @@ const HomePage = () => {
         {/* Post Problem */}
         <div className="w-1/4">
           <PostForm />
+          {/* <SearchFilter />b */}
         </div>
         {/* Newsfeed */}
         <div className="w-2/4">

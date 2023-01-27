@@ -2,8 +2,6 @@ import NewsFeedTab from "./NewsFeedTab";
 import PostCard from "./PostCard";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
-import Loader from "../../Common/Loader";
-import EmptyResult from "../../Common/EmptyResult";
 
 const NewsFeed = () => {
   const [postData, setPostData] = useState([]);
@@ -20,7 +18,7 @@ const NewsFeed = () => {
       {/* {!isLoading && postData.length === 0 && <EmptyResult />} */}
 
       <div className="flex flex-col gap-8 my-10">
-        {postData.map((post, i) => (
+        {postData?.map((post, i) => (
           <PostCard post={post} key={i} />
         ))}
       </div>

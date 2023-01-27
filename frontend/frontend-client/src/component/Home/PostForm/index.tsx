@@ -4,6 +4,7 @@ import { API, getAccessToken } from "../../../api/API";
 import { forwardGeocoding } from "../../../utils/location";
 import axios from "axios";
 import { useSWRConfig } from "swr";
+import SearchFilter from "../HomeNavigation/SearchFilter";
 
 interface IFormData {
   isAnonymous: boolean;
@@ -181,7 +182,7 @@ const PostForm = () => {
           className="flex items-center mt-4 cursor-pointer"
           onClick={(e: any) => {
             const data = formData.isAnonymous;
-            console.log(data);
+
             setFormData((prevState) => {
               return {
                 ...prevState,
@@ -204,7 +205,7 @@ const PostForm = () => {
             className="w-1/2 mt-5"
           />
         )}
-        <div className="flex align-center justify-between mt-10 relative">
+        <div className="flex align-center justify-between mt-4 relative">
           <img
             src={"/assets/svg/Add Photo Camera.svg"}
             alt="camera"
