@@ -10,3 +10,12 @@ export const addUserSchema = object({
 })
 
 export type AddUserInput = TypeOf<typeof addUserSchema>
+
+export const addEmailSchema = object({
+  body: object({
+    email: z.string(),
+    password: z.string(),
+  }),
+})
+
+export type AddLoginInput = TypeOf<typeof addEmailSchema>

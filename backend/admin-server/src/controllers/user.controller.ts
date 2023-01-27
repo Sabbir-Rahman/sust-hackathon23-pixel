@@ -1,7 +1,8 @@
 import { Response, Request } from 'express'
+import config from 'config'
 import userService from '../services/user.service'
-import { bcryptUtils, randomTextUtils } from '../utils'
-import { AddUserInput } from '../validators/user'
+import { bcryptUtils, jwtUtils, randomTextUtils } from '../utils'
+import { AddLoginInput, AddUserInput } from '../validators/user'
 import { User } from '../interfaces/modelInterfaces/user.interface'
 import ModelError from '../utils/ModelError'
 async function createUser(
@@ -55,4 +56,46 @@ async function createUser(
   res.status(response.statusCode).json(response)
 }
 
-export default { createUser }
+const userLogin = async (
+  req: Request<never, never, AddLoginInput['body']>,
+  res: Response
+): Promise<void> => {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: 'Email of password not correct. Login unsuccessfull',
+    developerMessage: '',
+    isReadOnly: false,
+    data: {},
+  }
+  let accessToken = ''
+  let refreshToken = ''
+
+  const user = await userService.loginUser(req.body.email, req.body.password)
+
+  if (user instanceof ModelError) {
+    response.developerMessage = user.error
+  } else if (user) {
+    const jwtObject = {
+      userId: String(user._id),
+      name: user.name,
+      role: user.role,
+    }
+
+    accessToken = await jwtUtils.signJwt(jwtObject, {
+      expiresIn: config.get('accessTokenTtl'),
+    })
+
+    if (accessToken.length > 0) {
+      response.message = 'Login successfull'
+      response.isSuccess = true
+      response.statusCode = 200
+      response.data = { ...user, accessToken, refreshToken }
+    }
+  }
+
+  res.status(response.statusCode).json(response)
+}
+
+
+export default { createUser,userLogin }
