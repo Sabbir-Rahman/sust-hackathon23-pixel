@@ -24,3 +24,10 @@ export const logInfo = (
 ): void => {
   customLogger.info(`Info:|${functionName}|${file}|${message}`)
 }
+export const logServiceError = (
+  functionName: string,
+  file: string,
+  message: string
+): void => {
+  customLogger.error(`Service|${functionName}|${file}|${message}`)
+}
