@@ -15,7 +15,7 @@ async function createPost(data: Post): Promise<PostDoc | ModelError> {
 }
 
 async function findMapDataWithLocation(
-  centerCoordinate: [number],
+  centerCoordinate: number[],
   radius: number
 ): Promise<PostDoc[] | ModelError> {
   try {

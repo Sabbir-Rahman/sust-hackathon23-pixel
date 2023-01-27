@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { Post } from '../interfaces/blog'
 import { postService } from '../services'
 import ModelError from '../utils/ModelError'
-import { AddProblemInput } from '../validators/post'
+import { AddProblemInput, viewPostDataWithinRadiusSchemaInput } from '../validators/post'
 
 const createPost = async (
   req: Request<never, never, AddProblemInput['body']>,
@@ -46,7 +46,7 @@ const createPost = async (
 }
 
 const viewPostWithinaRadius = async (
-  req: Request<never, never, AddProblemInput['body']>,
+  req: Request<never, never, viewPostDataWithinRadiusSchemaInput['body']>,
   res: Response
 ): Promise<void> => {
   const response = {
@@ -58,21 +58,7 @@ const viewPostWithinaRadius = async (
     data: {},
   }
 
-  const { title, descryption, images, postType, problemTag, coordinates } =
-    req.body
-  const postObj: Post = {
-    userId: res.locals.user.userId,
-    title,
-    descryption,
-    images,
-    location: {
-      type: 'Point',
-      coordinates,
-    },
-    postType,
-    problemTag,
-  }
-  const post = await postService.createPost(postObj)
+  const post = await postService.findMapDataWithLocation(req.body.centerCoordinate,req.body.radius)
 
   if (post instanceof ModelError) {
     response.developerMessage = post.error
@@ -87,4 +73,4 @@ const viewPostWithinaRadius = async (
 }
 
 
-export default { createPost }
+export default { createPost, viewPostWithinaRadius }
