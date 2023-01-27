@@ -16,6 +16,7 @@ const createPost = async (req: Request<never, never, AddProblemInput['body']>, r
 
   const { title, descryption, images, postType,problemTag, lat,long} = req.body
   const postObj: Post = {
+    userId: res.locals.user.userId,
     title,
     descryption,
     images,
