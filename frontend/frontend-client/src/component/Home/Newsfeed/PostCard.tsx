@@ -11,8 +11,6 @@ type IProps = {
   post: any;
 };
 const PostCard = ({ post }: IProps) => {
-  console.log(post);
-
   return (
     <div className="bg-white shadow-lg rounded-2xl px-8 py-6 border-b-4 border-accent relative">
       {/* Menu */}

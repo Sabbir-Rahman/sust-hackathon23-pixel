@@ -10,9 +10,12 @@ const HomeNavigation = () => {
             src="/assets/heatmap_lightbox 1.png"
             className="h-[200px] rounded-xl"
           />
-          <button className="inline-block bg-accent py-3 text-sm font-medium text-white rounded-xl">
+          <Link
+            to="/heatmap"
+            className="inline-block bg-accent py-3 text-sm font-medium text-white rounded-xl text-center"
+          >
             Expand
-          </button>
+          </Link>
         </div>
         <div className="bg-white shadow-md rounded-2xl p-4 w-[300px] flex flex-col justify-between mt-6">
           <div className="flex items-center justify-between">
