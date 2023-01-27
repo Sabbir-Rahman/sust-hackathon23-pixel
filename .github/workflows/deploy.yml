@@ -41,10 +41,10 @@ jobs:
         pm2 save
         cd ..
         cd socket-server
-        pm2 stop 4
+        pm2 stop 3
         npm i
         npm run build
-        pm2 start 4
+        pm2 start 3
         pm2 status
         pm2 save
         cd ..
