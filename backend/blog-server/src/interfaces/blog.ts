@@ -7,8 +7,8 @@ export interface Post {
   descryption: string
   images?: string[]
   location: {
-    type: string
     coordinates: number[]
+    type: string
   }
   reactions?: {
     upvote: number

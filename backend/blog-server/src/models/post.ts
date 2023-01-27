@@ -7,8 +7,12 @@ const postSchema = new Schema<Post>({
   descryption: String,
   images: [String],
   location: {
-    type: { type: String, default: 'Point' },
-    coordinates: [{ type: Number }],
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true,
+    },
+    coordinates: { type: [Number], required: true },
   },
   reactions: {
     upvote: { type: Number, default: 0 },
@@ -17,9 +21,9 @@ const postSchema = new Schema<Post>({
   postType: { type: String, required: true },
   tags: [{ type: String }],
   problemTag: { type: String },
-  status: { type: String, default: 'active' }
+  status: { type: String, default: 'active' },
 })
 
-const PostModel = model<PostDoc>('posts',postSchema) as Model<PostDoc>
+const PostModel = model<PostDoc>('posts', postSchema) as Model<PostDoc>
 
 export default PostModel
