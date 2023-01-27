@@ -19,7 +19,7 @@ const postSchema = new Schema<Post>({
   },
   reactions: {
     upvote: { type: Number, default: 0 },
-    voteUsersId: { type: String, default: [] },
+    voteUsersId: { type: [String], default: [] },
     downvote: { type: Number, default: 0 },
     comments: { type: Number, default: 0},
     isSolved: { type: Boolean, default: false },

@@ -15,7 +15,7 @@ export interface Post {
   }
   reactions?: {
     upvote: number
-    voteUsersId: number[]
+    voteUsersId: string[]
     downvote: number
     comments: number
     isSolved: boolean
