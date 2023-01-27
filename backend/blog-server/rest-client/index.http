@@ -46,7 +46,7 @@ Content-Type: application/json
 ###
 
 # blog service view all post data global
-GET http://167.172.79.117/backend-blog/post/view/global?title=Test
+GET http://167.172.79.117/backend-blog/post/view/global
 Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 
