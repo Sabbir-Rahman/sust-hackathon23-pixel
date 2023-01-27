@@ -167,10 +167,18 @@ const searchWithDescryption = async (
     data: {},
   }
   const { descryption } = req.query
-
+  console.log(descryption)
   const postData = await postService.searchPostWithTextDescryption(String(descryption))
 
-  
+  if (postData instanceof ModelError) {
+    response.developerMessage = postData.error
+  } else {
+    response.data = postData
+    response.statusCode = 200
+    response.isSuccess = true
+    response.message = 'Search with descryption successfull'
+  }
+  res.status(response.statusCode).json(response)
 }
 
-export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages }
+export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages, searchWithDescryption }
