@@ -9,6 +9,8 @@ const userSchema = new Schema<User>(
     nickName: { type: String, required: true },
     password: { type: String, required: true },
     image: { type: String },
+    totalUpvoteCount: { type: Number, default: 0 },
+    totalRepostCount: { type: Number, default: 0 },
     email: { type: String },
     role: { type: [String], required: true },
     isEmailVerified: { type: Boolean, default: false },

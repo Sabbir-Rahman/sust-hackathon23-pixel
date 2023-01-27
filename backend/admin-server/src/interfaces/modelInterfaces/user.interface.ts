@@ -7,6 +7,8 @@ export interface User {
   nickName: string
   password: string
   image?: string
+  totalUpvoteCount?: number
+  totalRepostCount?: number
   email: string
   role: string[]
   isEmailVerified?: boolean
