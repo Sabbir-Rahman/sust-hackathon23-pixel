@@ -7,3 +7,8 @@
     @apply mt-1 w-full outline-none bg-white text-sm text-darkGray px-4 py-3 border-[1px] border-gray-200 focus:border-2 focus:border-blue rounded-xl;
   }
 }
+
+.leaflet-container {
+  width: 60%;
+  height: 60vh;
+}
