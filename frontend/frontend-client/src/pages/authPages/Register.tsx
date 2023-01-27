@@ -1,6 +1,40 @@
+import { useState } from "react";
+import axios from "axios";
+
 const Register = () => {
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleOnChange = (e: any) => {
+    const { value, id } = e.target;
+    setUserInfo((prevState) => {
+      return {
+        ...prevState,
+        [id]: value,
+      };
+    });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        `http://167.172.79.117/backend-admin/api/v1/user/create`,
+        userInfo
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex w-screen h-screen">
+      <div className="absolute top-10 right-10">
+        <img src="/assets/logo.svg" className="w-32 h-auto" />
+      </div>
       <div className="hidden md:block w-1/2">
         <img
           src="/assets/auth.png"
@@ -9,60 +43,59 @@ const Register = () => {
         />
       </div>
       <div className="w-full md:w-1/2 h-full flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-semibold text-center mb-4">Register</h1>
-        <form className="mt-10 w-full md:px-24 px-10">
-          <div className="flex items-center gap-8 mb-6 md:flex-row flex-col">
-            <div className="w-full md:w-1/2">
+        <h1 className="text-4xl font-semibold text-center mb-4">Sign Up</h1>
+        <form className="mt-10 w-80" onSubmit={handleSubmit}>
+          <div className="flex items-center gap-8 flex-col">
+            <div className="w-full">
               <label
-                htmlFor="FirstName"
+                htmlFor="Email"
                 className="block text-sm font-medium text-gray-700"
               >
-                First Name
+                Email
               </label>
 
-              <input type="text" id="lastName" className="authInput" />
+              <input
+                type="email"
+                id="email"
+                className="authInput"
+                value={userInfo.email}
+                onChange={handleOnChange}
+                required
+              />
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="w-full ">
               <label
-                htmlFor="lastName"
+                htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-                Last Name
+                Password
               </label>
 
-              <input type="text" id="lastName" className="authInput" />
-            </div>
-          </div>
-          <div className="flex items-center gap-8 md:flex-row flex-col">
-            <div className="w-full md:w-1/2">
-              <label
-                htmlFor="FirstName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                First Name
-              </label>
-
-              <input type="text" id="lastName" className="authInput" />
-            </div>
-            <div className="w-full md:w-1/2">
-              <label
-                htmlFor="lastName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Last Name
-              </label>
-
-              <input type="text" id="lastName" className="authInput" />
+              <input
+                type="password"
+                id="password"
+                className="authInput"
+                value={userInfo.password}
+                onChange={handleOnChange}
+                required
+              />
+              <p className="text-xs mt-2 text-center">
+                Forget Password?{" "}
+                <span className="text-accent font-medium">Reset</span>
+              </p>
             </div>
           </div>
           <div className="mt-12 flex items-center justify-center flex-col">
-            <button className="inline-block rounded border border-blue bg-blue px-24 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue focus:outline-none focus:ring active:text-indigo-500">
-              Register
+            <button
+              className="inline-block rounded border border-accent bg-accent px-16 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-accent focus:outline-none focus:ring active:text-indigo-500"
+              type="submit"
+            >
+              Sign In
             </button>
             <p className="text-xs mt-2">
-              Already have an account?{" "}
-              <a className="text-blue font-medium" href="/login">
-                Sign In
+              Already have an acoount?{" "}
+              <a className="text-accent font-medium" href="/login">
+                Sign in
               </a>
             </p>
           </div>
