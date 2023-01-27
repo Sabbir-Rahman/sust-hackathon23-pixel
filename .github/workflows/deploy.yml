@@ -63,12 +63,6 @@ jobs:
         cd ..
         pm2 status 
         pm2 save
-        cd elibrary-service
-        npm i
-        npm run build
-        pm2 start npm --name "elibrary-server" -- run start
-        pm2 status
-        pm2 save
         cd ..
         pm2 status 
         pm2 save

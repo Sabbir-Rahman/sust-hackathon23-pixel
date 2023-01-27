@@ -14,7 +14,7 @@ app.use(
 const port = process.env.PORT || 5000
 
 app.get('/', (req, res) => {
-  res.send('Welcome')
+  res.send('Welcome from admin marketplace')
 })
 
 app.use('/api',testRouter)
