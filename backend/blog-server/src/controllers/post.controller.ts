@@ -154,4 +154,23 @@ const viewImage = async (
   readstram.pipe(res)
 }
 
+const searchWithDescryption = async (
+  req: Request<never, never, never>,
+  res: Response
+): Promise<any> => {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: 'Search with descryption not succesfull',
+    developerMessage: '',
+    isReadOnly: false,
+    data: {},
+  }
+  const { descryption } = req.query
+
+  const postData = await postService.searchPostWithTextDescryption(String(descryption))
+
+  
+}
+
 export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages }
