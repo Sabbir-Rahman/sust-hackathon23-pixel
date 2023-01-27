@@ -1,4 +1,5 @@
 import Layout from "../component/Common/Layout";
+import HomeNavigation from "../component/Home/HomeNavigation";
 import NewsFeed from "../component/Home/NewsFeed";
 
 const HomePage = () => {
@@ -12,7 +13,9 @@ const HomePage = () => {
           <NewsFeed />
         </div>
         {/* Home Navigation */}
-        <div className="w-1/4">3</div>
+        <div className="w-1/4">
+          <HomeNavigation />
+        </div>
       </div>
     </Layout>
   );
