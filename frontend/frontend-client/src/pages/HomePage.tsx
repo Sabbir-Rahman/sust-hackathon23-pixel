@@ -1,6 +1,7 @@
 import Layout from "../component/Common/Layout";
 import HomeNavigation from "../component/Home/HomeNavigation";
-import NewsFeed from "../component/Home/NewsFeed";
+import NewsFeed from "../component/Home/Newsfeed";
+
 import PostForm from "../component/Home/PostForm";
 
 const HomePage = () => {
