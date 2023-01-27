@@ -3,7 +3,7 @@ import React from "react";
 
 const ProductSidebar = () => {
   return (
-    <div className="mx-8 mt-8 h-screen">
+    <div className="mx-8 mt-8">
       <div className="bg-white py-4 rounded-2xl">
         <p className="px-6 font-semibold mb-4">Created By</p>
         <div className="flex px-6 items-center gap-4">

@@ -4,6 +4,7 @@ import {
   ReplyIcon,
   CheckIcon,
   LocationMarkerIcon,
+  ChatAlt2Icon,
 } from "@heroicons/react/outline";
 type IProps = {
   imgUrl?: string;
@@ -47,22 +48,26 @@ const PostCard = ({ imgUrl }: IProps) => {
         </div>
       </div>
       <div className="bg-gray-200 h-[1px] my-4 block w-full"></div>
-      <div className="flex items-center justify-center gap-8">
+      <div className="flex items-center justify-center gap-4">
         <div className="flex gap-2 items-center">
           <ChevronDoubleUpIcon className="newsFeedIcon" />
-          <span className="text-sm text-[#A3A3A3]">Upvote</span>
+          <span className="text-xs text-[#A3A3A3]">Upvote (23)</span>
         </div>
         <div className="flex gap-2 items-center">
           <ChevronDoubleDownIcon className="newsFeedIcon" />
-          <span className="text-sm text-[#A3A3A3]">Downvote</span>
+          <span className="text-xs text-[#A3A3A3]">Downvote (10)</span>
         </div>
         <div className="flex gap-2 items-center">
           <CheckIcon className="newsFeedIcon" />
-          <span className="text-sm text-[#A3A3A3]">Solve</span>
+          <span className="text-xs text-[#A3A3A3]">Solve (3)</span>
+        </div>
+        <div className="flex gap-2 items-center">
+          <ChatAlt2Icon className="newsFeedIcon" />
+          <span className="text-xs text-[#A3A3A3]">Comments (7)</span>
         </div>
         <div className="flex gap-2 items-center">
           <ReplyIcon className="newsFeedIcon" />
-          <span className="text-sm text-[#A3A3A3]">Repost</span>
+          <span className="text-xs text-[#A3A3A3]">Repost (2)</span>
         </div>
       </div>
       <div className="bg-gray-200 h-[4px] my-4 block w-full"></div>

@@ -9,6 +9,7 @@ import {
   CircleMarker,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import Heatmap from "./Analytics/heatmap.component";
 
 const App = () => {
   const center: LatLngExpression | undefined = [24.911, 91.841];
@@ -61,42 +62,7 @@ const App = () => {
   const limeOptions = { color: "lime" };
   const purpleOptions = { color: "purple" };
   const redOptions = { color: "red" };
-  return (
-    <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Circle center={center} pathOptions={fillBlueOptions} radius={200} />
-      <CircleMarker
-        center={[23.77, 90.399]}
-        pathOptions={redOptions}
-        radius={20}
-      >
-        <Popup>Popup in CircleMarker</Popup>
-      </CircleMarker>
-      <CircleMarker
-        center={[24.912, 91.841]}
-        pathOptions={limeOptions}
-        radius={20}
-        interactive
-      >
-        <Popup>Garbage Problem</Popup>
-      </CircleMarker>
-      <CircleMarker
-        center={[24.915, 91.842]}
-        pathOptions={limeOptions}
-        radius={30}
-      >
-        <Popup>Water Problem</Popup>
-      </CircleMarker>
-      {/* <Polyline pathOptions={limeOptions} positions={polyline} />
-    <Polyline pathOptions={limeOptions} positions={multiPolyline} />
-    <Polygon pathOptions={purpleOptions} positions={polygon} />
-    <Polygon pathOptions={purpleOptions} positions={multiPolygon} />
-    <Rectangle bounds={rectangle} pathOptions={blackOptions} /> */}
-    </MapContainer>
-  );
+  return <Heatmap />;
 };
 
 export default App;
