@@ -24,7 +24,7 @@ Content-Type: application/json
 
 {
   "title": "Test post far",
-  "descryption": "Test post 5 descryption",
+  "descryption": "We have seen that  soil fertility is getting worse due to overuse of chemical fertilizers. Authority need to stop the use of chemical fertilizer.",
   "coordinates": [ -110.1571442, 32.2586857 ],
   "postType": "complain",
   "problemTag": "ocean pollution",
