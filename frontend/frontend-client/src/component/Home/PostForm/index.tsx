@@ -1,9 +1,12 @@
-import React, { useRef, useState } from 'react';
-import { API } from '../../../api/API';
-import { forwardGeocoding } from '../../../utils/location';
+import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+import { API, getAccessToken } from "../../../api/API";
+import { forwardGeocoding } from "../../../utils/location";
+import axios from "axios";
+import { useSWRConfig } from "swr";
 
 interface IFormData {
-  anonymous: boolean;
+  isAnonymous: boolean;
   location: string;
   descryption: string;
   coordinates: Number[] | undefined;
@@ -14,50 +17,54 @@ interface IFormData {
 const PostForm = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [locationAllowed, setLocationAllowed] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('Select Category');
-  const categories = ['Human', 'Social', 'Economic', 'Environment'];
+  const [selectedCategory, setSelectedCategory] = useState("Human");
+  const categories = ["Human", "Social", "Economic", "Environment", "Other"];
   const [formData, setFormData] = useState<IFormData>({
-    anonymous: false,
-    location: '',
-    descryption: '',
+    isAnonymous: false,
+    location: "",
+    descryption: "",
     coordinates: [],
-    postType: 'complain',
+    postType: "complain",
     problemTag: selectedCategory,
   });
 
   const [file, setFile] = useState<any>(null);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const filePickerRef = useRef<HTMLInputElement>(null);
+
+  const { mutate } = useSWRConfig();
 
   const pickImageHandler = () => {
     console.log(filePickerRef.current);
     filePickerRef.current!.click();
   };
 
-  const handleImage = async (event: any) => {
-    if (event.target.files && event.target.files.length === 1) {
-      setFile(event.target.files[0]);
-    }
-  };
+  const handleImageUpload = async (e: any) => {
+    const { files } = e.target;
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    };
 
-  const onClickSaveImage = async () => {
-    const data = new FormData();
-    // data.append('image', file, file.name);
-    // const response = await dispatch(
-    //   actions.uploadProfileImage,
-    //   {},
-    //   data,
-    //   contextStore.user.token
-    // );
-    // console.log(response);
-    // if (response.errors) {
-    //   return;
-    // }
-    // const user = { ...response, token: contextStore.user.token };
-    // setContextStore({ ...contextStore, user });
-    // setShowSpinner(false);
-    // localStorage.setItem('user', JSON.stringify(user));
-    setFile(null);
+    try {
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i += 1) {
+        formData.append("", e.target.files[i]);
+      }
+
+      const { data } = await axios.post(
+        `http://167.172.79.117/backend-blog/post/images/upload`,
+        formData,
+        config
+      );
+
+      setSelectedImages(data?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onChangeFormData = (e: any) => {
@@ -78,18 +85,24 @@ const PostForm = () => {
     }
   }
 
-  const createPost = async () => {
-    //
-    const data = new FormData();
-    data.append('image', file || '', file!.name || '');
-    data.append('descryption', formData.descryption);
-    data.append('postType', formData.postType);
-    data.append('problemTag', formData.problemTag);
-    data.append('anonymous', new Boolean(formData.anonymous).toString());
+  const postData = async (e: any) => {
+    e.preventDefault();
+    try {
+      const response = await API.post("/backend-blog/post/create", {
+        ...formData,
+        images: selectedImages,
+      });
+      mutate(`/backend-blog/post/view/global`);
+      toast.success("Post created successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    if (!formData.coordinates) {
-      let geolocation = await forwardGeocoding(formData.location);
-      console.log(geolocation);
+  const createPost = async (e: any) => {
+    let geolocation = await forwardGeocoding(formData.location);
+
+    if (geolocation.latitude) {
       setFormData({
         ...formData,
         coordinates: [geolocation.longitude, geolocation.latitude],
@@ -98,87 +111,66 @@ const PostForm = () => {
         ...formData,
         coordinates: [geolocation.longitude, geolocation.latitude],
       };
-      const response = await API.post('/backend-blog/post/create', dataToSend);
-      console.log(response);
-    } else {
-      const response = await API.post('/backend-blog/post/create', formData);
-      console.log(response);
+
+      postData(e);
+    } else if (formData.coordinates) {
+      postData(e);
     }
   };
 
   return (
-    <div className='w-[22%] bg-white shadow-md rounded-lg fixed top-24 left-10'>
-      <div className=' text-black p-4'>
-        <div className='flex items-center justify-between'>
-          <div className='font-bold text-2xl'>Post a Problem</div>
-          <img src='/assets/svg/write-note 1.svg' alt='edit' />
+    <div className="w-[22%] bg-white shadow-md rounded-lg fixed top-24 left-10">
+      <div className=" text-black p-4">
+        <div className="flex items-center justify-between">
+          <div className="font-bold text-2xl">Post a Problem</div>
+          <img src="/assets/svg/write-note 1.svg" alt="edit" />
         </div>
         <div>
-          <div className='font-bold text-xs mt-8 mb-2'>Description</div>
+          <div className="font-bold text-xs mt-8 mb-2">Description</div>
           <textarea
             onChange={(e) => {
               onChangeFormData(e);
             }}
             value={formData.descryption}
-            name='descryption'
-            className='h-24 w-full p-4 rounded-lg border-2 outline-accent resize-none'
-            placeholder='Enter text here...'
+            name="descryption"
+            className="h-24 w-full p-4 rounded-lg border-2 outline-accent resize-none"
+            placeholder="Enter text here..."
           />
         </div>
-        <div>
-          <div className='font-bold text-xs mt-4 mb-2 '>Category</div>
-          <div
-            className='h-8 w-full rounded-lg border-2 p-4 text-xs flex items-center justify-between cursor-pointer'
-            onClick={() => {
-              setOpenDropdown(!openDropdown);
-            }}>
-            <div
-              className={
-                selectedCategory === 'Select Category' ? 'text-lightGray' : ''
-              }>
-              {selectedCategory}
-            </div>
-            <img
-              className='h-2 w-2 mt-1'
-              src={
-                !openDropdown
-                  ? '/assets/svg/blackDropDown.svg'
-                  : '/assets/svg/blackDropUp.svg'
-              }
-              alt='downArrow'
-            />
-          </div>
-        </div>
-        {openDropdown && (
-          <div className=' h-28 overflow-y-scroll'>
-            {categories.map((category, index) => (
-              <div
-                key={index}
-                className='h-8 w-full rounded-lg border-2 p-4 text-xs flex items-center justify-center cursor-pointer transition ease-in-out delay-50 hover:bg-[#ECF6EC] hover:text-darkGray'
-                onClick={() => {
-                  setSelectedCategory(category);
-                  setOpenDropdown(!openDropdown);
-                }}>
+        <div className="w-full flex">
+          <label htmlFor="SortBy" className="sr-only w-full">
+            SortBy
+          </label>
+
+          <select
+            id="SortBy"
+            className="h-12 text-sm border-gray-200  px-4 w-full outline-none border-2 mt-3 rounded-lg"
+            value={formData.problemTag}
+            name="problemTag"
+            onChange={onChangeFormData}
+          >
+            {categories.map((category) => (
+              <option value={category} key={category}>
                 {category}
-              </div>
+              </option>
             ))}
-          </div>
-        )}
+          </select>
+        </div>
         <div>
-          <div className='font-bold text-xs mt-4 mb-2'>Location</div>
-          <div className='h-8 w-full rounded-lg border-2 p-4 text-xs flex items-center justify-between outline-accent'>
+          <div className="font-bold text-xs mt-4 mb-2">Location</div>
+          <div className="h-8 w-full rounded-lg border-2 px-4 py-[22px] text-xs flex items-center justify-between outline-accent">
             <input
               onChange={(e) => {
                 onChangeFormData(e);
               }}
-              name='location'
+              name="location"
               value={formData.location}
-              className='w-3/4 outline-none'
-              placeholder='Enter location'
+              className="w-3/4 outline-none"
+              placeholder="Enter location (Optional)"
             />
             <img
-              src='/assets/svg/location.svg'
-              alt='location'
+              src="/assets/svg/location.svg"
+              alt="location"
               onClick={() => {
                 getLocation();
               }}
@@ -186,48 +178,60 @@ const PostForm = () => {
           </div>
         </div>
         <div
-          className='flex items-center mt-4 cursor-pointer'
-          onClick={() => {
-            const data = formData.anonymous;
+          className="flex items-center mt-4 cursor-pointer"
+          onClick={(e: any) => {
+            const data = formData.isAnonymous;
             console.log(data);
-            setFormData({ ...formData, anonymous: !data });
-          }}>
+            setFormData((prevState) => {
+              return {
+                ...prevState,
+                isAnonymous: !prevState.isAnonymous,
+              };
+            });
+          }}
+        >
           <div
             className={`h-4 w-4 border-2 rounded-sm mr-2 ${
-              formData.anonymous ? 'bg-accent' : ''
-            }`}></div>
-          <div className='text-xs font-bold'>Post as Anonymous</div>
+              formData.isAnonymous ? "bg-accent" : ""
+            }`}
+          ></div>
+          <div className="text-xs font-bold">Post as Anonymous</div>
         </div>
         {file && (
           <img
             src={URL.createObjectURL(file)}
-            alt='camera'
-            className='w-1/2 mt-5'
+            alt="camera"
+            className="w-1/2 mt-5"
           />
         )}
-        <div className='flex align-center justify-between mt-10'>
+        <div className="flex align-center justify-between mt-10 relative">
           <img
-            src={'/assets/svg/Add Photo Camera.svg'}
-            alt='camera'
-            className='cursor-pointer'
+            src={"/assets/svg/Add Photo Camera.svg"}
+            alt="camera"
+            className="cursor-pointer"
             onClick={pickImageHandler}
           />
           <input
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             ref={filePickerRef}
-            type='file'
-            className='profile-img__input'
-            id='image'
-            name='image'
-            placeholder='Choose the image'
-            accept='.jpg,.png,.jpeg'
-            onChange={handleImage}
+            type="file"
+            className="profile-img__input"
+            id="image"
+            name="image"
+            placeholder="Choose the image"
+            accept=".jpg,.png,.jpeg"
+            onChange={handleImageUpload}
+            multiple
           />
+          {selectedImages.length > 0 && (
+            <p className="absolute text-[10px] text-accent -bottom-3 left-0">
+              {selectedImages.length} files has been selected
+            </p>
+          )}
           <div
-            className='bg-accent text-white w-2/4 h-10 rounded-lg flex align-center justify-center pt-2 cursor-pointer transition ease-in-out delay-50 hover:bg-darkAccent'
-            onClick={() => {
-              createPost();
-            }}>
+            className="bg-accent text-white w-2/4 h-10 rounded-lg flex align-center justify-center pt-2 cursor-pointer transition ease-in-out delay-50 hover:bg-darkAccent"
+            onClick={createPost}
+          >
             Post
           </div>
         </div>
