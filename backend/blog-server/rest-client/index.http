@@ -43,3 +43,10 @@ Content-Type: application/json
   "centerCoordinate": [ -110.1571442, 32.2586857 ]
 }
 ###
+
+# blog service view all post data global
+GET http://localhost:5001/post/view/global?title=Test post5
+Authorization: {{userLogin.response.body.data.accessToken}}
+Content-Type: application/json 
+
+###

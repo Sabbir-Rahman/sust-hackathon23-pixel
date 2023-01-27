@@ -4,7 +4,6 @@ import { testRouter } from './routers'
 import { logInfo } from '../logger/customLogger'
 import connect from './utils/mongodbConnect'
 import userRouter from './routers/user.router'
-import cors from 'cors'
 require('dotenv').config()
 
 const app = express()

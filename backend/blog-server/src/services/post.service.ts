@@ -33,7 +33,19 @@ async function findMapDataWithLocation(
   }
 }
 
+async function findGlobalData(
+  query: Record<string, unknown>
+): Promise<PostDoc[] | ModelError> {
+  try {
+    const postData = await PostModel.find(query)
+    return postData
+  } catch (error) {
+    logServiceError('findGlobalData', FILENAME, String(error))
+    return new ModelError(error)
+  }
+}
 export default {
   createPost,
-  findMapDataWithLocation
+  findMapDataWithLocation,
+  findGlobalData,
 }
