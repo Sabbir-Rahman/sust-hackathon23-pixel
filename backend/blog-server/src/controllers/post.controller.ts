@@ -1,8 +1,14 @@
 import { Request, Response } from 'express'
+import fs from 'fs'
+import util from 'util'
+import { s3Bucket } from '../utils'
 import { Post } from '../interfaces/blog'
 import { postService } from '../services'
 import ModelError from '../utils/ModelError'
 import { AddProblemInput, viewPostDataWithinRadiusSchemaInput } from '../validators/post'
+import { Key } from '../interfaces/type'
+
+const unlinkFile = util.promisify(fs.unlink)
 
 const createPost = async (
   req: Request<never, never, AddProblemInput['body']>,
@@ -99,4 +105,51 @@ const viewGlobalPostData = async (
   res.status(response.statusCode).json(response)
 }
 
-export default { createPost, viewPostWithinaRadius, viewGlobalPostData }
+const uploadPostImages = async (
+  req: Request<never, never, never>,
+  res: Response
+) => {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: 'Upload images not succesfull',
+    developerMessage: '',
+    isReadOnly: false,
+    data: {},
+  }
+
+  const { title } = req.params
+  const filesInfo: any = req.files
+  const filesKey = []
+
+  for (let i = 0; i < filesInfo.length; i++) {
+    const result = await s3Bucket.uploadFile(filesInfo[i])
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    await unlinkFile(filesInfo[i].path)
+    if (result) {
+      filesKey.push(result.Key)
+    }
+  }
+
+  if (filesKey.length > 0) {
+    response.data = filesKey
+    response.statusCode = 200
+    response.isSuccess = true
+    response.message = 'Image upload successfull'
+  }
+
+  res.status(response.statusCode).json(response)
+}
+
+const viewImage = async (
+  req: Request<Key, never, never>,
+  res: Response
+): Promise<any> => {
+  const { key } = req.params
+
+  const readstram = s3Bucket.getFileStream(key)
+
+  readstram.pipe(res)
+}
+
+export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages }
