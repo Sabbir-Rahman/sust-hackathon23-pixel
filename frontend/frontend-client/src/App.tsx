@@ -8,6 +8,7 @@ import MarketPlace from './pages/MarketPlace';
 import ServiceDetails from './component/MarketPlace/ServiceDetails';
 import SellerSignUp from './pages/SellerAuthPages/SellerSignup';
 import SellerRegister from './pages/SellerAuthPages/SellerRegister';
+import AddServiceDetails from './pages/SellerAuthPages/AddServiceDetails';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/subscription-page' element={<SubscriptionPage />} />
         <Route path='/seller-signup' element={<SellerSignUp />} />
         <Route path='/seller-signin' element={<SellerRegister />} />
+        <Route path='/add-service-details' element={<AddServiceDetails />} />
       </Routes>
     </div>
   );
