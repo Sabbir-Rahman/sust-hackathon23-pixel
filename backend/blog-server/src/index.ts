@@ -1,5 +1,5 @@
 import express from 'express'
-import { testRouter } from './routers'
+import { postRouter, testRouter } from './routers'
 import { logInfo } from '../logger/customLogger'
 import connect from './utils/mongodbConnect'
 require('dotenv').config()
@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api',testRouter)
+app.use('/post',postRouter)
 
 app.listen(port, async () => {
   logInfo('index.ts', './index.ts', `Server running on ${port}`)
