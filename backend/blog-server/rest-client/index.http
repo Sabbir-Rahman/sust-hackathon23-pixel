@@ -18,7 +18,7 @@ Content-Type: application/json
 ###
 
 # blog service add post
-POST http://167.172.79.117/backend-blog/post/create
+POST http://localhost:5001/post/create
 Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 
@@ -27,7 +27,8 @@ Content-Type: application/json
   "descryption": "Test post 5 descryption",
   "coordinates": [ -110.1571442, 32.2586857 ],
   "postType": "complain",
-  "problemTag": "ocean pollution"
+  "problemTag": "ocean pollution",
+  "images": ["123456123456","123456123456"]
 }
 ###
 
@@ -45,7 +46,7 @@ Content-Type: application/json
 ###
 
 # blog service view all post data global
-GET http://167.172.79.117/backend-blog/post/view/global?title=Test post5
+GET http://167.172.79.117/backend-blog/post/view/global?title=Test
 Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 

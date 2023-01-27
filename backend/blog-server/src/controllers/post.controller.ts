@@ -22,12 +22,12 @@ const createPost = async (
     isReadOnly: false,
     data: {},
   }
-
+  console.log(res.locals.user)
   const { title, descryption, images, postType, problemTag, coordinates } =
     req.body
   const postObj: Post = {
     userId: res.locals.user.userId,
-    nickName: res.locals.user.nickName,
+    name: res.locals.user.name,
     isAnonymous: res.locals.user.isAnonymous,
     title,
     descryption,

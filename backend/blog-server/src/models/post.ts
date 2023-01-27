@@ -3,7 +3,7 @@ import { Post, PostDoc } from '../interfaces/blog'
 
 const postSchema = new Schema<Post>({
   userId: String,
-  nickName: String,
+  name: String,
   isAnonymous: { type: Boolean, default: false },
   title: String,
   parentPostId: String,
