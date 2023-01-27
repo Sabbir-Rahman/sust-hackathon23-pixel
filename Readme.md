@@ -10,3 +10,4 @@ https://www.figma.com/file/vX8VHPLoW6AVwCC05tKD0n/Team-Pixel_SUST_Hackathon?node
 
 Link for figma prototype
  https://www.figma.com/proto/vX8VHPLoW6AVwCC05tKD0n/Team-Pixel_SUST_Hackathon?page-id=0%3A1&node-id=6%3A1664&viewport=179%2C127%2C0.05&scaling=scale-down-width&starting-point-node-id=6%3A1664
+

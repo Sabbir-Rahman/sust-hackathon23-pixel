@@ -9,4 +9,8 @@ export default {
   accessTokenTtl: '1000m',
   privateKey: process.env.RSA_PRIVATE_KEY,
   publicKey: process.env.RSA_PUBLIC_KEY,
+  awsBucketName: process.env.AWS_BUCKET_NAME,
+  awsRegion: process.env.AWS_BUCKET_REGION,
+  awsAccessKeyId: process.env.AWS_ACCESS_KEY,
+  awsSecretAccessKey: process.env.AWS_SECRET_KEY,
 }

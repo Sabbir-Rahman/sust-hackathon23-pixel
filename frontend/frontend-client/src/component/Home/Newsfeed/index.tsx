@@ -1,14 +1,35 @@
-import NewsFeedTab from './NewsFeedTab';
-import PostCard from './PostCard';
+import NewsFeedTab from "./NewsFeedTab";
+import PostCard from "./PostCard";
+import useSWR from "swr";
+import { useEffect, useState } from "react";
+import Loader from "../../Common/Loader";
+import EmptyResult from "../../Common/EmptyResult";
 
 const NewsFeed = () => {
+  const [postData, setPostData] = useState([]);
+  const { data, isLoading } = useSWR("/backend-blog/post/view/global");
+
+  // console.log(postData);
+
+  useEffect(() => {
+    if (data) {
+      setPostData(data?.data);
+    }
+  }, [postData]);
+
   return (
-    <div className='px-10 mt-6'>
+    <div className="px-10 mt-6">
       <NewsFeedTab />
-      <div className='flex flex-col gap-8 my-10'>
-        <PostCard />
-        <PostCard imgUrl='https://images.unsplash.com/photo-1598335624134-5bceb5de202d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8c3VzdGFpbmFiaWxpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60' />
-      </div>
+      {!isLoading && postData.length === 0 && <EmptyResult />}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="flex flex-col gap-8 my-10">
+          {postData?.map((post, i) => (
+            <PostCard post={post} key={i} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

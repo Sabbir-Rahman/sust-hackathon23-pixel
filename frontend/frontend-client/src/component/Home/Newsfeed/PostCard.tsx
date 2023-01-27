@@ -6,18 +6,24 @@ import {
   LocationMarkerIcon,
   ChatAlt2Icon,
 } from "@heroicons/react/outline";
+import Menu from "./Menu";
 type IProps = {
   imgUrl?: string;
+  post: any;
 };
-const PostCard = ({ imgUrl }: IProps) => {
+const PostCard = ({ imgUrl, post }: IProps) => {
   return (
-    <div className="bg-white shadow-lg rounded-2xl px-8 py-6 border-b-4 border-accent">
+    <div className="bg-white shadow-lg rounded-2xl px-8 py-6 border-b-4 border-accent relative">
+      {/* Menu */}
+      <div className="absolute top-4 right-4">
+        <Menu />
+      </div>
       <div className="flex gap-4">
         <img src="/assets/svg/avatar.svg" className="h-12 w-12 rounded-full" />
         <div>
           <div className="flex gap-3">
             <span className="text-xs bg-accent px-2 py-0.5 rounded-md text-white">
-              Carbon Emission
+              {post?.problemTag}
             </span>
             <div className="flex gap-1 items-center text-xs">
               <LocationMarkerIcon className="h-4 w-4 text-lightGray" />
@@ -33,41 +39,27 @@ const PostCard = ({ imgUrl }: IProps) => {
                 className="w-full h-[250px] object-cover rounded-xl mb-4"
               />
             )}
-            <p className="text-sm text-lightGray">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur alias voluptates amet repellat explicabo ullam ut?
-              Atque officia aperiam nisi cupiditate, hic quae assumenda, esse
-              est sed accusamus illum aut architecto qui saepe provident
-              perferendis molestiae quibusdam tenetur inventore voluptate
-              praesentium sapiente. Sed hic reiciendis consequuntur delectus
-              obcaecati cum aperiam magni? Hic eos iusto numquam non. Quae
-              dolorem, architecto eveniet atque quibusdam enim deserunt
-              similique animi eaque sit deleniti quaerat
-            </p>
+            <p className="text-sm text-lightGray">{post?.descryption}</p>
           </div>
         </div>
       </div>
       <div className="bg-gray-200 h-[1px] my-4 block w-full"></div>
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-6">
         <div className="flex gap-2 items-center">
           <ChevronDoubleUpIcon className="newsFeedIcon" />
-          <span className="text-xs text-[#A3A3A3]">Upvote (23)</span>
+          <span className="text-sm text-[#A3A3A3]">Upvote (23)</span>
         </div>
         <div className="flex gap-2 items-center">
           <ChevronDoubleDownIcon className="newsFeedIcon" />
-          <span className="text-xs text-[#A3A3A3]">Downvote (10)</span>
-        </div>
-        <div className="flex gap-2 items-center">
-          <CheckIcon className="newsFeedIcon" />
-          <span className="text-xs text-[#A3A3A3]">Solve (3)</span>
+          <span className="text-sm text-[#A3A3A3]">Downvote (10)</span>
         </div>
         <div className="flex gap-2 items-center">
           <ChatAlt2Icon className="newsFeedIcon" />
-          <span className="text-xs text-[#A3A3A3]">Comments (7)</span>
+          <span className="text-sm text-[#A3A3A3]">Comments (7)</span>
         </div>
         <div className="flex gap-2 items-center">
           <ReplyIcon className="newsFeedIcon" />
-          <span className="text-xs text-[#A3A3A3]">Repost (2)</span>
+          <span className="text-sm text-[#A3A3A3]">Repost (2)</span>
         </div>
       </div>
       <div className="bg-gray-200 h-[4px] my-4 block w-full"></div>

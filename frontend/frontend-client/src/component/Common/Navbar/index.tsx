@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <div className="h-16 w-full bg-accent flex items-center justify-between pl-8 pr-8 fixed top-0 left-0 right-0">
+    <div className="h-16 w-full bg-accent flex items-center justify-between pl-8 pr-8 fixed top-0 left-0 right-0 z-30">
       <Link to="/">
-        <img src="/assets/logo.svg" className="h-14 w-14" />
+        <img src="/assets/logoV2.svg" className="h-16 w-16" />
       </Link>
       <div className="flex h-10 items-center justify-start pl-2 bg-white rounded-lg w-1/3">
         <img src="/assets/svg/search.svg" alt="magnifying icon" />
@@ -13,7 +13,7 @@ const Navbar = () => {
           type="text"
         />
       </div>
-      <div className="flex items-center justify-center cursor-pointer p-2 rounded-lg transition ease-in-out delay-50 hover:bg-darkAccent">
+      <div className="flex items-center justify-center cursor-pointer p-2 rounded-lg transition ease-in-out delay-50">
         <img
           className="h-8 w-8"
           src="/assets/svg/avatar.svg"
