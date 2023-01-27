@@ -22,5 +22,9 @@ router.get(
 )
 
 router.get('/view/global', auth(['user']), postController.viewGlobalPostData)
-
+router.post(
+  '/images/upload',
+  [auth(['admin']), upload.any()],
+  postController.uploadPostImages
+)
 export default router
