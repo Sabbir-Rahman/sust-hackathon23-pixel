@@ -68,14 +68,15 @@ const Heatmap = () => {
   const redOptions = { color: 'red' };
 
   return (
-    <MapContainer center={center} zoom={12} scrollWheelZoom={false}>
+    <MapContainer center={center} zoom={12} scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {/* <Circle center={center} pathOptions={fillBlueOptions} radius={200} /> */}
-      {hotSpots.map((spot: IHotspot) => (
+      {hotSpots.map((spot: IHotspot, index: number) => (
         <CircleMarker
+          key={index}
           center={spot.center}
           pathOptions={redOptions}
           radius={spot.radius}>
