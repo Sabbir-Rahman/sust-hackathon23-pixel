@@ -64,7 +64,7 @@ const PostForm = () => {
             {categories.map((category, index) => (
               <div
                 key={index}
-                className="h-8 w-full rounded-lg border-2 p-4 text-xs flex items-center justify-center cursor-pointer transition ease-in-out delay-50 hover:bg-darkAccent hover:text-white"
+                className="h-8 w-full rounded-lg border-2 p-4 text-xs flex items-center justify-center cursor-pointer transition ease-in-out delay-50 hover:bg-[#ECF6EC] hover:text-darkGray"
                 onClick={() => {
                   setSelectedCategory(category);
                   setOpenDropdown(!openDropdown);

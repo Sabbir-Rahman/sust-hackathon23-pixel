@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="h-16 w-full bg-accent flex items-center justify-between pl-8 pr-8 fixed top-0 left-0 right-0">
-      <div>Logo</div>
+      <Link to="/">
+        <img src="/assets/logo.svg" className="h-14 w-14" />
+      </Link>
       <div className="flex h-10 items-center justify-start pl-2 bg-white rounded-lg w-1/3">
         <img src="/assets/svg/search.svg" alt="magnifying icon" />
         <input
