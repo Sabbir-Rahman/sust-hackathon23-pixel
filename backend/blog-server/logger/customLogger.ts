@@ -17,6 +17,14 @@ export const logQueryError = (
   customLogger.error(`Query|${functionName}|${file}|${message}`)
 }
 
+export const logServiceError = (
+  functionName: string,
+  file: string,
+  message: string
+): void => {
+  customLogger.error(`Query|${functionName}|${file}|${message}`)
+}
+
 export const logInfo = (
   functionName: string,
   file: string,

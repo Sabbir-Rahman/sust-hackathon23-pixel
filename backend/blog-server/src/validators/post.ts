@@ -1,23 +1,16 @@
 import { object, TypeOf, z } from 'zod'
 
-export const addUserSchema = object({
+export const addPostSchema = object({
   body: object({
     title: z.string(),
     descryption: z.string(),
     images: z.array(z.string()).optional(),
-    coordinates: z.array(z.string()),
+    lat: z.number(),
+    long: z.number(),
     postType: z.string(),
-    problemTag: z.string()
+    problemTag: z.string(),
   }),
 })
 
-export type AddUserInput = TypeOf<typeof addUserSchema>
+export type AddProblemInput = TypeOf<typeof addPostSchema>
 
-export const addEmailSchema = object({
-  body: object({
-    email: z.string(),
-    password: z.string(),
-  }),
-})
-
-export type AddLoginInput = TypeOf<typeof addEmailSchema>

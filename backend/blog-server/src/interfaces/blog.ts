@@ -8,16 +8,16 @@ export interface Post {
   images?: string[]
   location: {
     type: string
-    coordinates: [number]
+    coordinates: number[]
   }
-  reactions: {
+  reactions?: {
     upvote: number
     downvote: number
   }
   postType: string
-  tags: string[]
+  tags?: string[]
   problemTag: string
-  status: string
+  status?: string
 }
 
 export type PostDoc = Post & CorrectedDocument

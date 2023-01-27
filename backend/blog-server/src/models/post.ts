@@ -8,7 +8,7 @@ const postSchema = new Schema<Post>({
   images: [String],
   location: {
     type: { type: String, default: 'Point' },
-    coordinates: [{ type: String }],
+    coordinates: [{ type: Number }],
   },
   reactions: {
     upvote: { type: Number, default: 0 },
