@@ -23,9 +23,9 @@ Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
 
 {
-  "title": "Test post5",
+  "title": "Test post far",
   "descryption": "Test post 5 descryption",
-  "coordinates": [24.912, 91.875],
+  "coordinates": [ -110.1571442, 32.2586857 ],
   "postType": "complain",
   "problemTag": "ocean pollution"
 }
