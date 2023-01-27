@@ -14,10 +14,10 @@ const postSchema = new Schema<Post>({
     upvote: { type: Number, default: 0 },
     downvote: { type: Number, default: 0 },
   },
-  postType: { type: String },
+  postType: { type: String, required: true },
   tags: [{ type: String }],
-  problemTag: { type: Boolean },
-  status: { type: String }
+  problemTag: { type: String },
+  status: { type: String, default: 'active' }
 })
 
 const PostModel = model<PostDoc>('posts',postSchema) as Model<PostDoc>

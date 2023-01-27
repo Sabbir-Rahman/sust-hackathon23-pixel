@@ -16,7 +16,7 @@ export interface Post {
   }
   postType: string
   tags: string[]
-  problemTag: boolean
+  problemTag: string
   status: string
 }
 
