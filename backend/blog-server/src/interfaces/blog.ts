@@ -3,7 +3,8 @@ import { CorrectedDocument } from '../models/types'
 
 export interface Post {
   userId: string
-  title: string
+  title?: string
+  parentPostId?: string
   descryption: string
   images?: string[]
   location: {

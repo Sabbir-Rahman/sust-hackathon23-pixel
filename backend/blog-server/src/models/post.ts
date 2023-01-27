@@ -4,6 +4,7 @@ import { Post, PostDoc } from '../interfaces/blog'
 const postSchema = new Schema<Post>({
   userId: String,
   title: String,
+  parentPostId: String,
   descryption: String,
   images: [String],
   location: {

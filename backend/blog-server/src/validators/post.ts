@@ -2,7 +2,8 @@ import { object, TypeOf, z } from 'zod'
 
 export const addPostSchema = object({
   body: object({
-    title: z.string(),
+    title: z.string().optional(),
+    parentPostId: z.string().optional(),
     descryption: z.string(),
     images: z.array(z.string()).optional(),
     coordinates: z.array(z.number()),
