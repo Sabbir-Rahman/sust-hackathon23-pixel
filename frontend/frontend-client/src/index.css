@@ -1,6 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #56d160;
+}
 
 @layer components {
   .authInput {

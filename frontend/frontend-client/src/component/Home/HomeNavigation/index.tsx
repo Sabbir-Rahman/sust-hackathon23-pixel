@@ -1,4 +1,4 @@
-import { ShoppingBagIcon, LocationMarkerIcon } from "@heroicons/react/outline";
+import { ShoppingBagIcon } from "@heroicons/react/outline";
 
 const HomeNavigation = () => {
   return (

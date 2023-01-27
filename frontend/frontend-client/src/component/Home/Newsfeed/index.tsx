@@ -3,7 +3,7 @@ import PostCard from "./PostCard";
 
 const NewsFeed = () => {
   return (
-    <div className="px-10">
+    <div className="px-10 mt-6">
       <NewsFeedTab />
       <div className="flex flex-col gap-8 my-10">
         <PostCard />
