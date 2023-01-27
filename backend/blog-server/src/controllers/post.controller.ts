@@ -52,7 +52,7 @@ const viewPostWithinaRadius = async (
   const response = {
     isSuccess: false,
     statusCode: 400,
-    message: 'Create post not successfull',
+    message: 'View post with radius not successfull',
     developerMessage: '',
     isReadOnly: false,
     data: {},
@@ -64,7 +64,7 @@ const viewPostWithinaRadius = async (
     response.developerMessage = post.error
   } else {
     response.isSuccess = true
-    response.message = 'Post created succesfully'
+    response.message = 'View post with radius succesfully'
     response.statusCode = 200
     response.data = post
   }
@@ -72,5 +72,31 @@ const viewPostWithinaRadius = async (
   res.status(response.statusCode).json(response)
 }
 
+const viewGlobalPostData = async (
+  req: Request<never, never, never>,
+  res: Response
+): Promise<void> => {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: 'View global post not successfull',
+    developerMessage: '',
+    isReadOnly: false,
+    data: {},
+  }
 
-export default { createPost, viewPostWithinaRadius }
+  const post = await postService.findGlobalData(req.query)
+
+  if (post instanceof ModelError) {
+    response.developerMessage = post.error
+  } else {
+    response.isSuccess = true
+    response.message = 'View global post succesful'
+    response.statusCode = 200
+    response.data = post
+  }
+
+  res.status(response.statusCode).json(response)
+}
+
+export default { createPost, viewPostWithinaRadius, viewGlobalPostData }
