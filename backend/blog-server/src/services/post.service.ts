@@ -44,8 +44,25 @@ async function findGlobalData(
     return new ModelError(error)
   }
 }
+
+async function searchPostWithTextDescryption(
+  descryption: string
+): Promise<PostDoc[] | ModelError> {
+  try {
+    const postData = await PostModel.find({descryption: /descryption/})
+    return postData
+  } catch (error) {
+    logServiceError(
+      'searchPostWithTextDescryption',
+      FILENAME,
+      String(error)
+    )
+    return new ModelError(error)
+  }
+}
 export default {
   createPost,
   findMapDataWithLocation,
   findGlobalData,
+  searchPostWithTextDescryption,
 }

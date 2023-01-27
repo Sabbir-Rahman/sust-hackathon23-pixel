@@ -22,13 +22,13 @@ const createPost = async (
     isReadOnly: false,
     data: {},
   }
-
+  console.log(res.locals.user)
   const { title, descryption, images, postType, problemTag, coordinates } =
     req.body
   const postObj: Post = {
     userId: res.locals.user.userId,
-    nickName: res.locals.user.nickName,
-    isAnonymous: res.locals.user.isAnonymous,
+    name: res.locals.user.name,
+    isAnonymous: req.body.isAnonymous,
     title,
     descryption,
     images,
@@ -154,4 +154,31 @@ const viewImage = async (
   readstram.pipe(res)
 }
 
-export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages }
+const searchWithDescryption = async (
+  req: Request<never, never, never>,
+  res: Response
+): Promise<any> => {
+  const response = {
+    isSuccess: false,
+    statusCode: 400,
+    message: 'Search with descryption not succesfull',
+    developerMessage: '',
+    isReadOnly: false,
+    data: {},
+  }
+  const { descryption } = req.query
+  console.log(descryption)
+  const postData = await postService.searchPostWithTextDescryption(String(descryption))
+
+  if (postData instanceof ModelError) {
+    response.developerMessage = postData.error
+  } else {
+    response.data = postData
+    response.statusCode = 200
+    response.isSuccess = true
+    response.message = 'Search with descryption successfull'
+  }
+  res.status(response.statusCode).json(response)
+}
+
+export default { createPost, viewPostWithinaRadius, viewGlobalPostData,viewImage, uploadPostImages, searchWithDescryption }

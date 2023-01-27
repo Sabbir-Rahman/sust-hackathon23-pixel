@@ -3,7 +3,7 @@ import { CorrectedDocument } from '../models/types'
 
 export interface Post {
   userId: string
-  nickName: string
+  name: string
   isAnonymous?: boolean
   title?: string
   parentPostId?: string
@@ -15,7 +15,7 @@ export interface Post {
   }
   reactions?: {
     upvote: number
-    voteUsersId: number[]
+    voteUsersId: string[]
     downvote: number
     comments: number
     isSolved: boolean

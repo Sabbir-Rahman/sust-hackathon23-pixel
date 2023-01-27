@@ -14,11 +14,17 @@ router.get(
   auth(['user']),
   postController.viewGlobalPostData
 )
-router.get('/view/image/:key', auth(['user']), postController.viewImage)
+router.get('/view/image/:key', postController.viewImage)
+router.get(
+  '/descryption/search',
+  auth(['user']),
+  postController.searchWithDescryption
+)
+
+router.get('/view/global', auth(['user']), postController.viewGlobalPostData)
 router.post(
   '/images/upload',
   [auth(['user']), upload.any()],
   postController.uploadPostImages
 )
-
 export default router
