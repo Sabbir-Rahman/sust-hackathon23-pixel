@@ -51,7 +51,7 @@ Content-Type: application/json
 
 ###
 
-# blog service view all post data global
+# blog service view all post data global with descryption with like mechanism
 GET http://localhost:5001/post/descryption/search?descryption=desc
 Authorization: {{userLogin.response.body.data.accessToken}}
 Content-Type: application/json 
